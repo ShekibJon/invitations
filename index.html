@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Make Your Invitation | ShopyStarSE</title>
+<meta name="robots" content="noindex">
+<style>
+@font-face { font-family: "GV"; src: url("fonts/GreatVibes-Regular.ttf") format("truetype"); font-display: block; }
+@font-face { font-family: "CG"; src: url("fonts/Cormorant.ttf") format("truetype"); font-weight: 300 700; font-display: block; }
+@font-face { font-family: "CGI"; src: url("fonts/Cormorant-Italic.ttf") format("truetype"); font-weight: 300 700; font-style: italic; font-display: block; }
+:root {
+  --bg: #f7f2ec; --card: #ffffff; --ink: #3f352f; --muted: #82766d; --line: #e7ddd2;
+  --gold: #b8924a; --gold-dark: #8e6c2e; --focus: #c9a35a;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: "CG", Georgia, serif; font-size: 18px; }
+body { padding: 0 16px 60px; }
+.wrap { max-width: 1040px; margin: 0 auto; }
+header { text-align: center; padding: 28px 0 8px; }
+header .brand { font-size: 14px; letter-spacing: .25em; text-transform: uppercase; color: var(--muted); }
+header h1 { font-family: "GV", cursive; font-weight: 400; font-size: 52px; color: var(--gold); margin: 6px 0 4px; line-height: 1.1; }
+header p { margin: 0 auto; max-width: 560px; color: var(--muted); font-size: 18px; }
+.grid { display: grid; grid-template-columns: 1fr; gap: 24px; margin-top: 22px; }
+@media (min-width: 900px) { .grid { grid-template-columns: 1fr 380px; align-items: start; } .preview { position: sticky; top: 16px; } }
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px 20px; }
+.step { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; font-weight: 600; font-size: 21px; }
+.step b { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--gold); color: #fff; font-size: 16px; font-family: Arial, sans-serif; }
+.swatches { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 26px; }
+.sw { flex: 1 1 90px; border: 2px solid var(--line); background: #fff; border-radius: 14px; padding: 10px 8px; cursor: pointer; text-align: center; font: inherit; color: inherit; font-size: 16px; }
+.sw span { display: block; height: 34px; border-radius: 9px; margin-bottom: 6px; }
+.sw[aria-pressed="true"] { border-color: var(--gold); box-shadow: 0 0 0 3px #f1e4c9; }
+label { display: block; font-weight: 600; font-size: 17px; margin: 14px 0 6px; }
+label small { font-weight: 400; color: var(--muted); }
+input[type=text], input[type=date], select { width: 100%; font: inherit; font-size: 18px; padding: 12px 14px; border: 1.5px solid var(--line); border-radius: 12px; background: #fffdfa; color: var(--ink); }
+input:focus, select:focus { outline: none; border-color: var(--focus); box-shadow: 0 0 0 3px #f3e7cf; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+details { margin-top: 18px; border-top: 1px solid var(--line); padding-top: 12px; }
+summary { cursor: pointer; font-weight: 600; color: var(--gold-dark); }
+.hint { color: var(--muted); font-size: 15px; margin: 4px 0 0; }
+.preview .panel { padding: 16px; text-align: center; }
+.stage { position: relative; width: 100%; max-width: 340px; margin: 0 auto; aspect-ratio: 9 / 16; border-radius: 18px; overflow: hidden; background: #eee5da; box-shadow: 0 10px 30px rgba(60,40,20,.15); }
+.stage canvas { width: 100%; height: 100%; display: block; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; border: 0; border-radius: 999px; padding: 15px 18px; font: inherit; font-size: 19px; font-weight: 600; cursor: pointer; margin-top: 12px; }
+.btn.main { background: var(--gold); color: #fff; }
+.btn.main:hover { background: var(--gold-dark); }
+.btn.soft { background: #f3ebe0; color: var(--ink); }
+.btn:disabled { opacity: .55; cursor: wait; }
+.progress { height: 8px; background: #efe6da; border-radius: 99px; overflow: hidden; margin-top: 12px; display: none; }
+.progress div { height: 100%; width: 0; background: var(--gold); transition: width .2s linear; }
+.status { min-height: 24px; margin-top: 8px; color: var(--muted); font-size: 16px; }
+.done { display: none; margin-top: 10px; padding: 14px; border-radius: 14px; background: #f6efe2; text-align: left; font-size: 16px; }
+.done ol { margin: 6px 0 0 18px; padding: 0; }
+footer { text-align: center; color: var(--muted); font-size: 14px; margin-top: 30px; }
+.err { color: #a2412f; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">ShopyStarSE</div>
+    <h1 id="pageTitle">Make your invitation</h1>
+    <p>Fill in your details. Watch the preview. Then download your video and printable card.</p>
+  </header>
+
+  <div class="grid">
+    <main class="panel">
+      <div class="step"><b>1</b> Choose your color</div>
+      <div class="swatches" id="swatches"></div>
+
+      <div class="step"><b>2</b> Your details</div>
+      <form id="form" autocomplete="off" onsubmit="return false"></form>
+
+      <details id="more">
+        <summary>Change the small lines (optional)</summary>
+        <div id="formMore"></div>
+      </details>
+    </main>
+
+    <aside class="preview">
+      <div class="panel">
+        <div class="step" style="justify-content:center"><b>3</b> Preview and download</div>
+        <div class="stage"><canvas id="cv" width="1080" height="1920"></canvas></div>
+        <button class="btn soft" id="playBtn" type="button">&#9654; Play preview</button>
+        <button class="btn main" id="videoBtn" type="button">Download my video</button>
+        <div class="progress" id="prog"><div></div></div>
+        <div class="status" id="status"></div>
+        <div class="done" id="done">
+          <strong>Your video is ready.</strong>
+          <ol>
+            <li>Find it in your Downloads (or Files on iPhone).</li>
+            <li>Send it in WhatsApp, Messages or email like any video.</li>
+          </ol>
+        </div>
+        <button class="btn soft" id="cardBtn" type="button">Download printable 5x7 card</button>
+      </div>
+    </aside>
+  </div>
+  <footer>Design &copy; ShopyStarSE. For personal use by the buyer only.</footer>
+</div>
+
+<video id="bgv" playsinline muted preload="auto" crossorigin="anonymous" style="display:none"></video>
+
+<script>
+"use strict";
+/* ---------------- product setup ---------------- */
+const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+const DAYS = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+const THEMES = {
+  blush:   { name: "Blush",        ink: [92,70,64],  seal: [176,120,112], sw: "linear-gradient(135deg,#f6dcd6,#e9b9ac)" },
+  sage:    { name: "Sage Green",   ink: [60,74,58],  seal: [112,132,104], sw: "linear-gradient(135deg,#dfe6d8,#a9b99c)" },
+  blue:    { name: "Dusty Blue",   ink: [50,64,88],  seal: [92,114,148],  sw: "linear-gradient(135deg,#dde5ef,#9fb1c9)" },
+  pink:    { name: "Pastel Pink",  ink: [100,70,78], seal: [196,132,146], sw: "linear-gradient(135deg,#fbe3e8,#eeb3c0)" },
+  bblue:   { name: "Baby Blue",    ink: [56,74,98],  seal: [120,150,186], sw: "linear-gradient(135deg,#e5eef8,#b4c9e2)" },
+  neutral: { name: "Boho Neutral", ink: [96,80,62],  seal: [176,146,108], sw: "linear-gradient(135deg,#f1e8db,#cdb595)" }
+};
+const PRODUCTS = {
+  wedding: {
+    title: "Your wedding invitation", themes: ["blush","sage","blue"],
+    fields: [
+      ["name1", "First name", "Emma", 18], ["name2", "Second name", "Liam", 18],
+      ["date", "Wedding date", "2027-06-12", 0, "date"], ["time", "Time line", "at four o'clock in the afternoon", 44],
+      ["venue", "Venue name", "Villa Rosendal", 30], ["address", "Venue address", "Rosendalsvagen 1, Stockholm", 44],
+      ["rsvpDate", "Reply by (date)", "2027-05-01", 0, "date"], ["rsvp", "RSVP: link, email or phone", "emmaandliam.com", 34]
+    ],
+    more: [
+      ["monogram", "Initials on the wax seal", "", 5], ["intro", "Top line", "Together with their families", 34],
+      ["invite", "Invite line", "invite you to celebrate their wedding", 44], ["after", "After the venue", "Dinner and dancing to follow", 40],
+      ["closing", "Closing line", "We can't wait to celebrate with you", 40]
+    ]
+  },
+  bridal: {
+    title: "Your bridal shower invitation", themes: ["blush","sage","blue"],
+    fields: [
+      ["honoree", "Name of the bride to be", "Emma Miller", 22], ["date", "Shower date", "2027-05-15", 0, "date"],
+      ["time", "Time line", "at eleven o'clock in the morning", 44], ["venue", "Venue name", "The Garden Room", 30],
+      ["address", "Venue address", "22 Rose Street, Stockholm", 44], ["after", "Hosted by", "Hosted by Anna and Sara", 40],
+      ["rsvpDate", "Reply by (date)", "2027-05-01", 0, "date"], ["rsvp", "RSVP: link, email or phone", "anna@email.com", 34]
+    ],
+    more: [
+      ["monogram", "Initial on the wax seal", "", 3], ["intro", "Top line", "Please join us for a", 34], ["title", "Title", "Bridal Shower", 18],
+      ["honor", "Line before the name", "honoring", 26], ["invite", "Invite line", "for an afternoon of brunch and bubbly", 44],
+      ["closing", "Closing line", "Let's celebrate the bride to be", 40]
+    ]
+  },
+  baby: {
+    title: "Your baby shower invitation", themes: ["pink","bblue","neutral"],
+    fields: [
+      ["honoree", "Name of mom to be (or parents)", "Sofia Andersson", 22], ["honor", "Line before the name", "honoring mom to be", 26, "select",
+        ["honoring mom to be", "honoring parents to be", "honoring dad to be", "honoring"]],
+      ["date", "Shower date", "2027-03-20", 0, "date"], ["time", "Time line", "at two o'clock in the afternoon", 44],
+      ["venue", "Venue name", "The Rose Cafe", 30], ["address", "Venue address", "10 Park Street, Stockholm", 44],
+      ["after", "Hosted by", "Hosted by Grandma Lena", 40], ["rsvpDate", "Reply by (date)", "2027-03-01", 0, "date"],
+      ["rsvp", "RSVP: link, email or phone", "lena@email.com", 34]
+    ],
+    more: [
+      ["monogram", "Text on the wax seal", "baby", 5], ["intro", "Top line", "Please join us for a", 34], ["title", "Title", "Baby Shower", 18],
+      ["invite", "Invite line", "A little one is on the way", 44], ["closing", "Closing line", "We can't wait to meet the baby", 40]
+    ]
+  }
+};
+const qs = new URLSearchParams(location.search);
+const KIND = PRODUCTS[qs.get("p")] ? qs.get("p") : "wedding";
+const P = PRODUCTS[KIND];
+const STORE = "shopystar_" + KIND;
+let state = {}; let theme = P.themes[0];
+try { const s = JSON.parse(localStorage.getItem(STORE) || "{}"); if (s.v) state = s.v; if (s.theme && P.themes.includes(s.theme)) theme = s.theme; } catch (e) {}
+document.getElementById("pageTitle").textContent = P.title;
+
+/* ---------------- form ---------------- */
+function buildField(f, parent) {
+  const [key, label, def, max, type, opts] = f;
+  const id = "f_" + key; const lab = document.createElement("label"); lab.htmlFor = id; lab.textContent = label;
+  let el;
+  if (type === "select") {
+    el = document.createElement("select");
+    opts.forEach(o => { const op = document.createElement("option"); op.value = o; op.textContent = o; el.appendChild(op); });
+  } else {
+    el = document.createElement("input"); el.type = type === "date" ? "date" : "text";
+    if (max) el.maxLength = max;
+    el.placeholder = def || "";
+  }
+  el.id = id;
+  el.value = state[key] !== undefined ? state[key] : (key === "monogram" ? "" : def);
+  el.addEventListener("input", () => { state[key] = el.value; save(); draw(curT); });
+  if (state[key] === undefined) state[key] = el.value;
+  parent.appendChild(lab); parent.appendChild(el);
+  if (key === "monogram") { const h = document.createElement("p"); h.className = "hint"; h.textContent = KIND === "baby" ? "Leave empty to show \"baby\"." : "Leave empty to use your initials automatically."; parent.appendChild(h); }
+}
+const form = document.getElementById("form"), formMore = document.getElementById("formMore");
+P.fields.forEach(f => buildField(f, form)); P.more.forEach(f => buildField(f, formMore));
+function save() { try { localStorage.setItem(STORE, JSON.stringify({ v: state, theme })); } catch (e) {} }
+
+const swWrap = document.getElementById("swatches");
+P.themes.forEach(k => {
+  const b = document.createElement("button"); b.type = "button"; b.className = "sw"; b.setAttribute("aria-pressed", k === theme);
+  b.innerHTML = `<span style="background:${THEMES[k].sw}"></span>${THEMES[k].name}`;
+  b.onclick = () => { theme = k; save(); [...swWrap.children].forEach(c => c.setAttribute("aria-pressed", c === b)); loadTheme(); };
+  swWrap.appendChild(b);
+});
+
+/* ---------------- values ---------------- */
+function val(k) { const v = (state[k] || "").trim(); if (v) return v; const all = P.fields.concat(P.more); const f = all.find(x => x[0] === k); return f ? f[2] : ""; }
+function dparts(k) { const s = val(k); const d = new Date(s + "T12:00:00"); if (isNaN(d)) return null; return { wd: DAYS[d.getDay()], day: String(d.getDate()), month: MONTHS[d.getMonth()], year: String(d.getFullYear()) }; }
+function V() {
+  const d = dparts("date") || { wd: "", day: "", month: "", year: "" }; const r = dparts("rsvpDate");
+  const o = { wd: d.wd, day: d.day, month: d.month, year: d.year, time: val("time"), venue: val("venue"), address: val("address"),
+    after: val("after"), rsvp: val("rsvp"), invite: val("invite"), closing: val("closing"), intro: val("intro"),
+    rsvpLine: r ? `Kindly reply by ${r.month} ${r.day}, ${r.year}` : "Kindly reply" };
+  if (KIND === "wedding") {
+    o.name1 = val("name1"); o.name2 = val("name2");
+    o.mono = (state.monogram || "").trim() || ((o.name1[0] || "") + "&" + (o.name2[0] || ""));
+  } else {
+    o.title = val("title"); o.honor = val("honor"); o.honoree = val("honoree");
+    o.mono = (state.monogram || "").trim() || (KIND === "baby" ? "baby" : (o.honoree[0] || ""));
+  }
+  return o;
+}
+
+/* ---------------- drawing helpers ---------------- */
+const cv = document.getElementById("cv"), ctx = cv.getContext("2d");
+const W = 1080, H = 1920, DUR = 22, CY0 = 120;
+const ease = t => { t = Math.max(0, Math.min(1, t)); return t * t * (3 - 2 * t); };
+const easeOut = t => { t = Math.max(0, Math.min(1, t)); return 1 - Math.pow(1 - t, 3); };
+const seg = (t, a, b) => t <= a ? 0 : t >= b ? 1 : (t - a) / (b - a);
+const rgb = (c, a = 1) => `rgba(${c[0]},${c[1]},${c[2]},${a})`;
+const GOLD = [[128,92,36],[206,168,90],[246,224,160],[190,146,66],[236,208,136],[146,106,44],[214,180,104]];
+const FONTS = { script: '"GV"', serif: '"CG"', ital: 'italic "CGI"' };
+function fontStr(kind, size, weight) { if (kind === "ital") return `italic 400 ${size}px "CGI"`; if (kind === "script") return `400 ${size}px "GV"`; return `${weight || 500} ${size}px "CG"`; }
+function trackW(c, text, track) { let w = 0; for (const ch of text) w += c.measureText(ch).width; return w + track * Math.max(0, [...text].length - 1); }
+function fit(c, text, kind, size, weight, track, maxw) {
+  for (let i = 0; i < 40; i++) { c.font = fontStr(kind, size, weight); const w = track ? trackW(c, text, track) : c.measureText(text).width; if (w <= maxw || size <= 20) return { size, track, w }; size = Math.floor(size * 0.94); track *= 0.94; }
+  return { size, track, w: maxw };
+}
+function drawTracked(c, text, cx, base, track) { const w = trackW(c, text, track); let x = cx - w / 2; c.textAlign = "left"; for (const ch of text) { c.fillText(ch, x, base); x += c.measureText(ch).width + track; } }
+/* ink text: center line at yc (matches the video engine layout) */
+function inkText(c, text, kind, size, color, alpha, yc, opt = {}) {
+  if (!text) return; const track = opt.caps ? size * 0.24 : (opt.track || 0); const t2 = opt.caps ? text.toUpperCase() : text;
+  const f = fit(c, t2, kind, size, opt.weight || (opt.caps ? 500 : 400), track, opt.maxw || 780);
+  c.save(); c.globalAlpha = alpha; c.fillStyle = rgb(color); c.font = fontStr(kind, f.size, opt.weight || (opt.caps ? 500 : 400)); c.textBaseline = "alphabetic";
+  const base = yc + 0.192 * f.size; const cx = opt.cx || W / 2;
+  if (f.track) drawTracked(c, t2, cx, base, f.track); else { c.textAlign = "center"; c.fillText(t2, cx, base); }
+  c.restore();
+}
+const off = document.createElement("canvas"), octx = off.getContext("2d");
+function goldText(c, text, kind, size, alpha, yc, t, opt = {}) {
+  if (!text) return; const f = fit(c, text, kind, size, opt.weight || 400, 0, opt.maxw || 800);
+  const hh = Math.ceil(f.size * 1.7), ww = Math.ceil(f.w) + 80; off.width = ww; off.height = hh;
+  octx.clearRect(0, 0, ww, hh); octx.font = fontStr(kind, f.size, opt.weight || 400); octx.textAlign = "center"; octx.textBaseline = "alphabetic";
+  const base = hh * 0.64; const g = octx.createLinearGradient(0, 0, 260 * 1.25, 260 * 0.7);
+  // repeat gold stops along the gradient by tiling a pattern
+  const tile = document.createElement("canvas"); tile.width = 300; tile.height = 300; const tc = tile.getContext("2d");
+  const tg = tc.createLinearGradient(0, 0, 300, 170); GOLD.forEach((s, i) => tg.addColorStop(i / (GOLD.length - 1), rgb(s))); tc.fillStyle = tg; tc.fillRect(0, 0, 300, 300);
+  octx.fillStyle = octx.createPattern(tile, "repeat"); octx.fillText(text, ww / 2, base);
+  if (opt.shimmer !== false) {
+    const period = 3.2; const p = ((t % period) / period) * (ww + 600) - 300;
+    octx.globalCompositeOperation = "source-atop";
+    const sg = octx.createLinearGradient(p - 120, 0, p + 120, 72); sg.addColorStop(0, "rgba(255,255,255,0)"); sg.addColorStop(.5, "rgba(255,250,235,.55)"); sg.addColorStop(1, "rgba(255,255,255,0)");
+    octx.fillStyle = sg; octx.fillRect(0, 0, ww, hh); octx.globalCompositeOperation = "source-over";
+  }
+  const x = (opt.cx || W / 2) - ww / 2, y = yc - hh / 2;
+  c.save(); c.globalAlpha = alpha * 0.28; c.filter = "blur(1.5px)"; c.drawImage(off, x + 1, y + 2); c.restore();
+  c.save(); c.globalAlpha = alpha; c.drawImage(off, x, y); c.restore();
+}
+function divider(c, yc, alpha) {
+  c.save(); c.globalAlpha = alpha; const g = c.createLinearGradient(W / 2 - 200, 0, W / 2 + 200, 0); g.addColorStop(0, rgb(GOLD[1])); g.addColorStop(.5, rgb(GOLD[2])); g.addColorStop(1, rgb(GOLD[3]));
+  c.strokeStyle = g; c.fillStyle = g; c.lineWidth = 2; c.beginPath(); c.moveTo(W / 2 - 200, yc); c.lineTo(W / 2 - 30, yc); c.moveTo(W / 2 + 30, yc); c.lineTo(W / 2 + 200, yc); c.stroke();
+  c.beginPath(); c.moveTo(W / 2, yc - 14); c.lineTo(W / 2 + 6, yc); c.lineTo(W / 2, yc + 14); c.lineTo(W / 2 - 6, yc); c.closePath(); c.fill(); c.restore();
+}
+function dateBlock(c, v, yc, alpha, t, ink) {
+  goldText(c, v.day, "serif", 230, alpha, yc - 10, t, { weight: 500 });
+  [[W / 2 - 290, v.wd], [W / 2 + 290, v.month]].forEach(([x, s]) => {
+    inkText(c, (s || "").toUpperCase(), "serif", 40, ink, alpha, yc, { track: 8, weight: 500, maxw: 250, cx: x });
+    c.save(); c.globalAlpha = alpha * 0.8; c.fillStyle = rgb(ink); c.fillRect(x - 150, yc - 46, 300, 4); c.fillRect(x - 150, yc + 38, 300, 4); c.restore();
+  });
+  inkText(c, v.year, "serif", 50, ink, alpha, yc + 160, { track: 10, weight: 500 });
+}
+
+/* ---------------- scenes (same timing as the designed video) ---------------- */
+function scenes(v) {
+  const ink = THEMES[theme].ink; const w = v.closing.split(/\s+/); const half = Math.ceil(w.length / 2);
+  const c1 = w.slice(0, half).join(" "), c2 = w.slice(half).join(" ");
+  let first;
+  if (KIND === "wedding") first = [6.6, 10.8, [["cap", v.intro, 40, 470, 0], ["gold", v.name1, 250, 680, .35], ["ink", "&", 140, 850, .7, "script"], ["gold", v.name2, 250, 1020, 1.0]]];
+  else if (KIND === "bridal") first = [6.6, 10.8, [["cap", v.intro, 40, 460, 0], ["gold", v.title, 220, 640, .35], ["cap", v.honor, 38, 800, .7], ["gold", v.honoree, 170, 940, 1.0]]];
+  else first = [6.6, 10.8, [["cap", v.intro, 38, 620, .3], ["gold", v.title, 190, 770, .6], ["cap", v.honor, 36, 900, .9], ["gold", v.honoree, 150, 1020, 1.2]]];
+  return [first,
+    [10.8, 14.8, [["ital", v.invite, 62, 470, 0], ["date", "", 0, 760, .4], ["ital", v.time, 58, 1060, 1.0]]],
+    [14.8, 18.6, [["cap", "Where", 40, 470, 0], ["serifb", v.venue, 96, 600, .3], ["ital", v.address, 56, 720, .6], ["div", "", 0, 830, .8], ["ital", v.after, 60, 950, 1.0]]],
+    [18.6, DUR + 1, [["cap", v.rsvpLine, 38, 470, 0], ["serifb", v.rsvp, 70, 590, .3], ["div", "", 0, 710, .6], ["gold", c1, 118, 860, .9], ["gold", c2, 118, 990, 1.2]]]
+  ];
+}
+function overlay(c, t) {
+  const v = V(); const th = THEMES[theme]; const ink = th.ink;
+  // monogram on the wax seal (envelope part, first 2.1 s)
+  const sa = 1 - ease(seg(t, 1.6, 2.1));
+  if (sa > 0.01 && t < 2.2) {
+    const intro = easeOut(seg(t, 0, 1)); const dy = (1 - intro) * 120; const fl = Math.sin(t * 2) * 6 * (1 - seg(t, 1.6, 2.1));
+    const y0 = Math.floor(1060 - 310 + dy + fl); const k = 1 + 0.2 * (1 - sa); const cy = y0 + 359 - 8 + 0.06 * 88 * k;
+    const size = 68.6 * k * (v.mono.length > 3 ? 3.2 / v.mono.length + 0.1 : 1);
+    const hi = th.seal.map(x => Math.min(255, Math.round(x * 1.35))), lo = th.seal.map(x => Math.round(x * 0.7));
+    c.save(); c.globalAlpha = sa; c.font = `400 ${size}px "GV"`; c.textAlign = "center"; c.textBaseline = "middle";
+    c.fillStyle = rgb(lo); c.fillText(v.mono, W / 2 + 0.7 * k, cy + 1); c.fillStyle = rgb(hi); c.fillText(v.mono, W / 2, cy); c.restore();
+  }
+  if (t < 6.0) return;
+  for (const [a, b, items] of scenes(v)) {
+    if (t < a - 0.1 || t > b + 0.1) continue;
+    const out = b < DUR ? 1 - ease(seg(t, b - 0.45, b)) : 1;
+    for (const [type, text, size, yc0, d, kind2] of items) {
+      const e = easeOut(seg(t, a + d, a + d + 1.0)); const k = e * out; if (k <= 0.01) continue;
+      const yc = CY0 + yc0 + 70 + (1 - e) * 30;
+      if (type === "cap") inkText(c, text, "serif", size, ink, k, yc, { caps: true, maxw: 780 });
+      else if (type === "ital") inkText(c, text, "ital", size, ink, k, yc, { maxw: 780 });
+      else if (type === "serifb") inkText(c, text, "serif", size, ink, k, yc, { weight: 600, maxw: 780 });
+      else if (type === "ink") inkText(c, text, kind2 || "serif", size, ink, k, yc, {});
+      else if (type === "gold") goldText(c, text, "script", size, k, yc, t + d, {});
+      else if (type === "div") divider(c, yc, k);
+      else if (type === "date") dateBlock(c, v, yc, k, t, ink);
+    }
+  }
+}
+
+/* ---------------- video playback ---------------- */
+const vid = document.getElementById("bgv"); let curT = 7.5, playing = false, recording = false, rafId = 0;
+function draw(t) { if (vid.readyState >= 2) ctx.drawImage(vid, 0, 0, W, H); else { ctx.fillStyle = "#efe6da"; ctx.fillRect(0, 0, W, H); } overlay(ctx, t); }
+function loadTheme() {
+  status(""); vid.src = `assets/bg_${theme}.mp4`; vid.load();
+  vid.onloadeddata = () => { vid.currentTime = playing ? 0 : 8.8; };
+  vid.onseeked = () => { if (!playing) draw(vid.currentTime); };
+}
+function loop() {
+  if (!playing) return; curT = vid.currentTime; draw(curT);
+  if (vid.ended || curT >= DUR - 0.02) { stopPlay(); return; }
+  rafId = requestAnimationFrame(loop);
+}
+function startPlay() { playing = true; vid.currentTime = 0; const pr = vid.play(); if (pr) pr.catch(() => {}); rafId = requestAnimationFrame(loop); }
+function stopPlay() { playing = false; cancelAnimationFrame(rafId); vid.pause(); if (!recording) { document.getElementById("playBtn").innerHTML = "&#9654; Play preview"; } }
+document.getElementById("playBtn").onclick = () => { if (recording) return; if (playing) { stopPlay(); } else { document.getElementById("playBtn").textContent = "Stop"; startPlay(); } };
+
+/* ---------------- export video ---------------- */
+function status(s, err) { const el = document.getElementById("status"); el.textContent = s; el.className = "status" + (err ? " err" : ""); }
+function pickType() {
+  const types = ["video/mp4;codecs=avc1.42E01E", "video/mp4;codecs=avc1", "video/mp4", "video/webm;codecs=vp9", "video/webm;codecs=vp8", "video/webm"];
+  for (const t of types) { try { if (window.MediaRecorder && MediaRecorder.isTypeSupported(t)) return t; } catch (e) {} }
+  return "";
+}
+function fileName(ext) { const v = V(); const n = (KIND === "wedding" ? v.name1 + "_" + v.name2 : v.honoree).replace(/[^\w]+/g, "_").replace(/^_|_$/g, ""); return `Invitation_${n || "video"}.${ext}`; }
+async function deliver(blob, name) {
+  const file = new File([blob], name, { type: blob.type });
+  if (navigator.canShare && navigator.canShare({ files: [file] }) && /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
+    try { await navigator.share({ files: [file], title: "My invitation" }); return; } catch (e) { /* fall back to download */ }
+  }
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 4000);
+}
+document.getElementById("videoBtn").onclick = async () => {
+  if (recording) return; const type = pickType();
+  if (!type || !cv.captureStream) { status("Sorry, this browser cannot make videos. Please open this page in Chrome or Safari.", true); return; }
+  stopPlay(); recording = true; const btn = document.getElementById("videoBtn"); btn.disabled = true; document.getElementById("playBtn").disabled = true;
+  const prog = document.getElementById("prog"), bar = prog.firstElementChild; prog.style.display = "block"; document.getElementById("done").style.display = "none";
+  status("Making your video. Keep this page open (about 25 seconds).");
+  const stream = cv.captureStream(30); const chunks = [];
+  const rec = new MediaRecorder(stream, { mimeType: type, videoBitsPerSecond: 9000000 });
+  rec.ondataavailable = e => { if (e.data && e.data.size) chunks.push(e.data); };
+  const finished = new Promise(r => rec.onstop = r);
+  vid.currentTime = 0; await new Promise(r => { vid.onseeked = r; }); vid.onseeked = null;
+  draw(0); rec.start(250); playing = true; await vid.play().catch(() => {});
+  await new Promise(resolve => {
+    const step = () => {
+      curT = vid.currentTime; draw(curT); bar.style.width = Math.min(100, curT / DUR * 100) + "%";
+      if (vid.ended || curT >= DUR - 0.03) { resolve(); return; }
+      requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  });
+  draw(DUR - 0.01); await new Promise(r => setTimeout(r, 300)); rec.stop(); await finished; playing = false;
+  const blob = new Blob(chunks, { type: type.split(";")[0] }); const ext = type.includes("mp4") ? "mp4" : "webm";
+  bar.style.width = "100%"; status(""); recording = false; btn.disabled = false; document.getElementById("playBtn").disabled = false;
+  document.getElementById("playBtn").innerHTML = "&#9654; Play preview";
+  vid.onseeked = () => { if (!playing) draw(vid.currentTime); };
+  document.getElementById("done").style.display = "block";
+  await deliver(blob, fileName(ext));
+};
+
+/* ---------------- printable 5x7 card ---------------- */
+document.getElementById("cardBtn").onclick = async () => {
+  const img = new Image(); img.src = `assets/card_${theme}.jpg`; await img.decode();
+  const c2 = document.createElement("canvas"); c2.width = 1500; c2.height = 2100; const c = c2.getContext("2d"); c.drawImage(img, 0, 0);
+  const v = V(); const ink = THEMES[theme].ink; const S = 1500 / W; c.save(); c.translate((1500 - W * 1) / 2, 0);
+  // reuse the drawing helpers on a 1080-wide coordinate system centered in the 1500 card
+  const rows = KIND === "wedding"
+    ? [["cap", v.intro, 40, 620], ["gold", v.name1, 200, 765], ["ink", "&", 110, 905, "script"], ["gold", v.name2, 200, 1040]]
+    : [["cap", v.intro, 40, 640], ["gold", v.title, 210, 790], ["cap", v.honor, 38, 920], ["gold", v.honoree, 160, 1040]];
+  const sh = KIND === "baby" ? 40 : 0;
+  const rest = [["ital", v.invite, 56, 1180], ["serifb", `${v.wd}, ${v.month} ${v.day}, ${v.year}`, 64, 1280], ["ital", v.time, 52, 1360],
+    ["serifb", v.venue, 66, 1450], ["ital", v.address, 48, 1520], ["serif", `${v.rsvpLine}  |  ${v.rsvp}`, 36, 1610]];
+  rows.map(r => [r[0], r[1], r[2], r[3] + sh, r[4]]).concat(rest.map(r => [r[0], r[1], r[2], r[3] + sh])).forEach(([type, text, size, yc, kind2]) => {
+    if (type === "cap") inkText(c, text, "serif", size, ink, 1, yc, { caps: true, maxw: 1000 });
+    else if (type === "ital") inkText(c, text, "ital", size, ink, 1, yc, { maxw: 1100 });
+    else if (type === "serifb") inkText(c, text, "serif", size, ink, 1, yc, { weight: 600, maxw: 1100 });
+    else if (type === "serif") inkText(c, text, "serif", size, ink, 1, yc, { weight: 500, maxw: 1100 });
+    else if (type === "ink") inkText(c, text, kind2, size, ink, 1, yc, {});
+    else if (type === "gold") goldText(c, text, "script", size, 1, yc, 0, { shimmer: false, maxw: 1100 });
+  });
+  c.restore();
+  c2.toBlob(b => deliver(b, fileName("jpg").replace("Invitation_", "Printable_Card_")), "image/jpeg", 0.95);
+};
+
+/* ---------------- start ---------------- */
+document.fonts.load('40px "GV"').then(() => document.fonts.load('500 40px "CG"')).then(() => document.fonts.load('italic 40px "CGI"')).finally(() => { loadTheme(); });
+</script>
+</body>
+</html>

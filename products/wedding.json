@@ -1,0 +1,491 @@
+{
+  "schemaVersion": 1,
+  "title": "Your wedding invitation",
+  "themes": [
+    "blush",
+    "sage",
+    "blue"
+  ],
+  "fields": [
+    [
+      "name1",
+      "First name",
+      "Emma",
+      40
+    ],
+    [
+      "name2",
+      "Second name",
+      "Liam",
+      40
+    ],
+    [
+      "date",
+      "Wedding date",
+      "2027-06-12",
+      0,
+      "date"
+    ],
+    [
+      "time",
+      "Time line",
+      "at four o'clock in the afternoon",
+      44
+    ],
+    [
+      "venue",
+      "Venue name",
+      "Villa Rosendal",
+      30
+    ],
+    [
+      "address",
+      "Venue address",
+      "Rosendalsvagen 1, Stockholm",
+      44
+    ],
+    [
+      "rsvpDate",
+      "Reply by (date)",
+      "2027-05-01",
+      0,
+      "date"
+    ],
+    [
+      "rsvp",
+      "RSVP: link, email or phone",
+      "emmaandliam.com",
+      34
+    ]
+  ],
+  "more": [
+    [
+      "monogram",
+      "Initials on the wax seal",
+      "",
+      5
+    ],
+    [
+      "intro",
+      "Top line",
+      "Together with their families",
+      34
+    ],
+    [
+      "invite",
+      "Invite line",
+      "invite you to celebrate their wedding",
+      44
+    ],
+    [
+      "after",
+      "After the venue",
+      "Dinner and dancing to follow",
+      40
+    ],
+    [
+      "closing",
+      "Closing line",
+      "We can't wait to celebrate with you",
+      40
+    ]
+  ],
+  "themeStyles": {
+    "blush": {
+      "name": "Blush",
+      "ink": [
+        92,
+        70,
+        64
+      ],
+      "seal": [
+        176,
+        120,
+        112
+      ],
+      "sw": "linear-gradient(135deg,#f6dcd6,#e9b9ac)",
+      "video": "assets/bg_blush.mp4",
+      "card": "assets/card_blush.jpg"
+    },
+    "sage": {
+      "name": "Sage Green",
+      "ink": [
+        60,
+        74,
+        58
+      ],
+      "seal": [
+        112,
+        132,
+        104
+      ],
+      "sw": "linear-gradient(135deg,#dfe6d8,#a9b99c)",
+      "video": "assets/bg_sage.mp4",
+      "card": "assets/card_sage.jpg"
+    },
+    "blue": {
+      "name": "Dusty Blue",
+      "ink": [
+        50,
+        64,
+        88
+      ],
+      "seal": [
+        92,
+        114,
+        148
+      ],
+      "sw": "linear-gradient(135deg,#dde5ef,#9fb1c9)",
+      "video": "assets/bg_blue.mp4",
+      "card": "assets/card_blue.jpg"
+    }
+  },
+  "monogram": {
+    "fields": [
+      "name1",
+      "name2"
+    ],
+    "separator": "&",
+    "fallback": "",
+    "hint": "Leave empty to use your initials automatically."
+  },
+  "reply": {
+    "withDate": "Kindly reply by {month} {day}, {year}",
+    "withoutDate": "Kindly reply"
+  },
+  "dateLine": "{wd}, {month} {day}, {year}",
+  "fileName": "{name1}_{name2}",
+  "scenes": [
+    {
+      "start": 6.6,
+      "end": 10.8,
+      "rows": [
+        {
+          "type": "text",
+          "text": "{intro}",
+          "size": 40,
+          "y": 470,
+          "delay": 0,
+          "font": "serif",
+          "color": "ink",
+          "options": {
+            "caps": true,
+            "maxw": 780
+          }
+        },
+        {
+          "type": "text",
+          "text": "{name1}",
+          "size": 250,
+          "y": 680,
+          "delay": 0.35,
+          "font": "script",
+          "color": "gold",
+          "options": {
+            "maxw": 800
+          }
+        },
+        {
+          "type": "text",
+          "text": "&",
+          "size": 140,
+          "y": 850,
+          "delay": 0.7,
+          "font": "script",
+          "color": "ink"
+        },
+        {
+          "type": "text",
+          "text": "{name2}",
+          "size": 250,
+          "y": 1020,
+          "delay": 1,
+          "font": "script",
+          "color": "gold",
+          "options": {
+            "maxw": 800
+          }
+        }
+      ]
+    },
+    {
+      "start": 10.8,
+      "end": 14.8,
+      "rows": [
+        {
+          "type": "text",
+          "text": "{invite}",
+          "size": 62,
+          "y": 470,
+          "delay": 0,
+          "font": "ital",
+          "color": "ink",
+          "options": {
+            "maxw": 780
+          }
+        },
+        {
+          "type": "date",
+          "y": 760,
+          "delay": 0.4
+        },
+        {
+          "type": "text",
+          "text": "{time}",
+          "size": 58,
+          "y": 1060,
+          "delay": 1,
+          "font": "ital",
+          "color": "ink",
+          "options": {
+            "maxw": 780
+          }
+        }
+      ]
+    },
+    {
+      "start": 14.8,
+      "end": 18.6,
+      "rows": [
+        {
+          "type": "text",
+          "text": "Where",
+          "size": 40,
+          "y": 470,
+          "delay": 0,
+          "font": "serif",
+          "color": "ink",
+          "options": {
+            "caps": true,
+            "maxw": 780
+          }
+        },
+        {
+          "type": "text",
+          "text": "{venue}",
+          "size": 96,
+          "y": 600,
+          "delay": 0.3,
+          "font": "serif",
+          "color": "ink",
+          "options": {
+            "weight": 600,
+            "maxw": 780
+          }
+        },
+        {
+          "type": "text",
+          "text": "{address}",
+          "size": 56,
+          "y": 720,
+          "delay": 0.6,
+          "font": "ital",
+          "color": "ink",
+          "options": {
+            "maxw": 780
+          }
+        },
+        {
+          "type": "divider",
+          "y": 830,
+          "delay": 0.8
+        },
+        {
+          "type": "text",
+          "text": "{after}",
+          "size": 60,
+          "y": 950,
+          "delay": 1,
+          "font": "ital",
+          "color": "ink",
+          "options": {
+            "maxw": 780
+          }
+        }
+      ]
+    },
+    {
+      "start": 18.6,
+      "end": 23,
+      "rows": [
+        {
+          "type": "text",
+          "text": "{rsvpLine}",
+          "size": 38,
+          "y": 470,
+          "delay": 0,
+          "font": "serif",
+          "color": "ink",
+          "options": {
+            "caps": true,
+            "maxw": 780
+          }
+        },
+        {
+          "type": "text",
+          "text": "{rsvp}",
+          "size": 70,
+          "y": 590,
+          "delay": 0.3,
+          "font": "serif",
+          "color": "ink",
+          "options": {
+            "weight": 600,
+            "maxw": 780
+          }
+        },
+        {
+          "type": "divider",
+          "y": 710,
+          "delay": 0.6
+        },
+        {
+          "type": "text",
+          "text": "{closing1}",
+          "size": 118,
+          "y": 860,
+          "delay": 0.9,
+          "font": "script",
+          "color": "gold"
+        },
+        {
+          "type": "text",
+          "text": "{closing2}",
+          "size": 118,
+          "y": 990,
+          "delay": 1.2,
+          "font": "script",
+          "color": "gold"
+        }
+      ]
+    }
+  ],
+  "card": {
+    "offsetY": 0,
+    "rows": [
+      {
+        "type": "text",
+        "text": "{intro}",
+        "size": 40,
+        "y": 620,
+        "delay": 0,
+        "font": "serif",
+        "color": "ink",
+        "options": {
+          "caps": true,
+          "maxw": 1000
+        }
+      },
+      {
+        "type": "text",
+        "text": "{name1}",
+        "size": 200,
+        "y": 765,
+        "delay": 0,
+        "font": "script",
+        "color": "gold",
+        "options": {
+          "shimmer": false,
+          "maxw": 1100
+        }
+      },
+      {
+        "type": "text",
+        "text": "&",
+        "size": 110,
+        "y": 905,
+        "delay": 0,
+        "font": "script",
+        "color": "ink"
+      },
+      {
+        "type": "text",
+        "text": "{name2}",
+        "size": 200,
+        "y": 1040,
+        "delay": 0,
+        "font": "script",
+        "color": "gold",
+        "options": {
+          "shimmer": false,
+          "maxw": 1100
+        }
+      },
+      {
+        "type": "text",
+        "text": "{invite}",
+        "size": 56,
+        "y": 1180,
+        "delay": 0,
+        "font": "ital",
+        "color": "ink",
+        "options": {
+          "maxw": 1100
+        }
+      },
+      {
+        "type": "text",
+        "text": "{dateLine}",
+        "size": 64,
+        "y": 1280,
+        "delay": 0,
+        "font": "serif",
+        "color": "ink",
+        "options": {
+          "weight": 600,
+          "maxw": 1100
+        }
+      },
+      {
+        "type": "text",
+        "text": "{time}",
+        "size": 52,
+        "y": 1360,
+        "delay": 0,
+        "font": "ital",
+        "color": "ink",
+        "options": {
+          "maxw": 1100
+        }
+      },
+      {
+        "type": "text",
+        "text": "{venue}",
+        "size": 66,
+        "y": 1450,
+        "delay": 0,
+        "font": "serif",
+        "color": "ink",
+        "options": {
+          "weight": 600,
+          "maxw": 1100
+        }
+      },
+      {
+        "type": "text",
+        "text": "{address}",
+        "size": 48,
+        "y": 1520,
+        "delay": 0,
+        "font": "ital",
+        "color": "ink",
+        "options": {
+          "maxw": 1100
+        }
+      },
+      {
+        "type": "text",
+        "text": "{rsvpLine}  |  {rsvp}",
+        "size": 36,
+        "y": 1610,
+        "delay": 0,
+        "font": "serif",
+        "color": "ink",
+        "options": {
+          "weight": 500,
+          "maxw": 1100
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "lang": "sv",
+  "title": "Din luciainbjudan",
+  "themes": ["luciared"],
+  "fields": [
+    ["host", "Familjens namn", "Familjen Andersson", 36],
+    ["date", "Datum", "2027-12-13", 0, "date"],
+    ["time", "Tid", "kl. 07.30", 24],
+    ["venue", "Plats", "hemma hos oss", 36],
+    ["address", "Adress", "Storgatan 12, Stockholm", 48],
+    ["dress", "Klädsel", "Vita kläder och röda band", 48],
+    ["rsvp", "OSA: e-post eller telefon", "familjen@example.com", 40]
+  ],
+  "more": [
+    ["rsvpDate", "OSA senast", "2027-12-06", 0, "date"],
+    ["monogram", "Text på sigillet", "", 5],
+    ["top", "Översta raden", "God morgon på lussefika!", 44],
+    ["title", "Rubrik", "Familjens lussefika", 32],
+    ["welcome", "Välkomsttext", "Kom och fira ljusets dag hemma hos oss.", 60],
+    ["closing", "Avslutning", "Vi ses i gryningen den 13 december!", 54]
+  ],
+  "themeStyles": {
+    "luciared": {
+      "name": "Luciaröd, tillfällig bakgrund",
+      "ink": [126, 91, 35],
+      "seal": [150, 104, 39],
+      "sw": "linear-gradient(135deg,#fff8e7,#8a1f2a)",
+      "video": "assets/bg_xmasred.mp4",
+      "card": "assets/card_xmasred.jpg"
+    }
+  },
+  "monogram": {
+    "fields": ["host"],
+    "separator": "",
+    "fallback": "L",
+    "hint": "Lämna tomt för familjens första bokstav."
+  },
+  "reply": {
+    "withDate": "OSA senast {day} {month} till",
+    "withoutDate": "OSA till"
+  },
+  "dateLine": "{wd} {day} {month} {year}",
+  "fileName": "Lucia_{host}",
+  "artworkNote": "TILLFÄLLIGT: använder xmasred. Byt till luciared med lucia_corner och lucia_garland, varmt stearinljus och ingen blombladseffekt när konsten finns i projektets art-mapp.",
+  "scenes": [
+    {
+      "start": 6.6,
+      "end": 10.8,
+      "rows": [
+        {"type": "text", "text": "{top}", "size": 48, "y": 470, "delay": 0, "font": "ital", "color": "ink", "options": {"maxw": 780}},
+        {"type": "text", "text": "{title}", "size": 160, "y": 660, "delay": 0.35, "font": "script", "color": "gold", "options": {"maxw": 800}},
+        {"type": "text", "text": "{host}", "size": 130, "y": 850, "delay": 0.7, "font": "script", "color": "gold", "options": {"maxw": 800}},
+        {"type": "text", "text": "{welcome}", "size": 50, "y": 1020, "delay": 1.0, "font": "ital", "color": "ink", "options": {"maxw": 780}}
+      ]
+    },
+    {
+      "start": 10.8,
+      "end": 14.8,
+      "rows": [
+        {"type": "text", "text": "Välkomna på lussefika", "size": 58, "y": 470, "delay": 0, "font": "ital", "color": "ink", "options": {"maxw": 780}},
+        {"type": "date", "y": 760, "delay": 0.4},
+        {"type": "text", "text": "{time}", "size": 58, "y": 1060, "delay": 1.0, "font": "ital", "color": "ink", "options": {"maxw": 780}}
+      ]
+    },
+    {
+      "start": 14.8,
+      "end": 18.6,
+      "rows": [
+        {"type": "text", "text": "Plats", "size": 40, "y": 470, "delay": 0, "font": "serif", "color": "ink", "options": {"caps": true, "maxw": 780}},
+        {"type": "text", "text": "{venue}", "size": 86, "y": 600, "delay": 0.3, "font": "serif", "color": "ink", "options": {"weight": 600, "maxw": 780}},
+        {"type": "text", "text": "{address}", "size": 52, "y": 720, "delay": 0.6, "font": "ital", "color": "ink", "options": {"maxw": 780}},
+        {"type": "divider", "y": 830, "delay": 0.8},
+        {"type": "text", "text": "Klädsel: {dress}", "size": 52, "y": 950, "delay": 1.0, "font": "ital", "color": "ink", "options": {"maxw": 780}}
+      ]
+    },
+    {
+      "start": 18.6,
+      "end": 23,
+      "rows": [
+        {"type": "text", "text": "{rsvpLine}", "size": 38, "y": 470, "delay": 0, "font": "serif", "color": "ink", "options": {"caps": true, "maxw": 780}},
+        {"type": "text", "text": "{rsvp}", "size": 70, "y": 590, "delay": 0.3, "font": "serif", "color": "ink", "options": {"weight": 600, "maxw": 780}},
+        {"type": "divider", "y": 710, "delay": 0.6},
+        {"type": "text", "text": "{closing1}", "size": 104, "y": 850, "delay": 0.9, "font": "script", "color": "gold", "options": {"maxw": 800}},
+        {"type": "text", "text": "{closing2}", "size": 104, "y": 990, "delay": 1.2, "font": "script", "color": "gold", "options": {"maxw": 800}}
+      ]
+    }
+  ],
+  "card": {
+    "offsetY": 0,
+    "rows": [
+      {"type": "text", "text": "{top}", "size": 42, "y": 560, "delay": 0, "font": "ital", "color": "ink", "options": {"maxw": 1100}},
+      {"type": "text", "text": "{title}", "size": 165, "y": 720, "delay": 0, "font": "script", "color": "gold", "options": {"shimmer": false, "maxw": 1100}},
+      {"type": "text", "text": "{host}", "size": 130, "y": 880, "delay": 0, "font": "script", "color": "gold", "options": {"shimmer": false, "maxw": 1100}},
+      {"type": "text", "text": "{welcome}", "size": 44, "y": 1000, "delay": 0, "font": "ital", "color": "ink", "options": {"maxw": 1100}},
+      {"type": "text", "text": "{dateLine}", "size": 64, "y": 1120, "delay": 0, "font": "serif", "color": "ink", "options": {"weight": 600, "maxw": 1100}},
+      {"type": "text", "text": "{time}", "size": 52, "y": 1200, "delay": 0, "font": "ital", "color": "ink", "options": {"maxw": 1100}},
+      {"type": "text", "text": "{venue}, {address}", "size": 52, "y": 1300, "delay": 0, "font": "serif", "color": "ink", "options": {"weight": 600, "maxw": 1100}},
+      {"type": "text", "text": "Klädsel: {dress}", "size": 42, "y": 1400, "delay": 0, "font": "ital", "color": "ink", "options": {"maxw": 1100}},
+      {"type": "text", "text": "{rsvpLine} {rsvp}", "size": 36, "y": 1500, "delay": 0, "font": "serif", "color": "ink", "options": {"weight": 500, "maxw": 1100}},
+      {"type": "text", "text": "{closing}", "size": 78, "y": 1620, "delay": 0, "font": "script", "color": "gold", "options": {"shimmer": false, "maxw": 1100}}
+    ]
+  }
+}

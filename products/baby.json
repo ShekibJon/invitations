@@ -1,0 +1,508 @@
+{
+  "schemaVersion": 1,
+  "title": "Your baby shower invitation",
+  "themes": [
+    "pink",
+    "bblue",
+    "neutral"
+  ],
+  "fields": [
+    [
+      "honoree",
+      "Name of mom to be (or parents)",
+      "Sofia Andersson",
+      40
+    ],
+    [
+      "honor",
+      "Line before the name",
+      "honoring mom to be",
+      26,
+      "select",
+      [
+        "honoring mom to be",
+        "honoring parents to be",
+        "honoring dad to be",
+        "honoring"
+      ]
+    ],
+    [
+      "date",
+      "Shower date",
+      "2027-03-20",
+      0,
+      "date"
+    ],
+    [
+      "time",
+      "Time line",
+      "at two o'clock in the afternoon",
+      44
+    ],
+    [
+      "venue",
+      "Venue name",
+      "The Rose Cafe",
+      30
+    ],
+    [
+      "address",
+      "Venue address",
+      "10 Park Street, Stockholm",
+      44
+    ],
+    [
+      "after",
+      "Hosted by",
+      "Hosted by Grandma Lena",
+      40
+    ],
+    [
+      "rsvpDate",
+      "Reply by (date)",
+      "2027-03-01",
+      0,
+      "date"
+    ],
+    [
+      "rsvp",
+      "RSVP: link, email or phone",
+      "lena@email.com",
+      34
+    ]
+  ],
+  "more": [
+    [
+      "monogram",
+      "Text on the wax seal",
+      "baby",
+      5
+    ],
+    [
+      "intro",
+      "Top line",
+      "Please join us for a",
+      34
+    ],
+    [
+      "title",
+      "Title",
+      "Baby Shower",
+      18
+    ],
+    [
+      "invite",
+      "Invite line",
+      "A little one is on the way",
+      44
+    ],
+    [
+      "closing",
+      "Closing line",
+      "We can't wait to meet the baby",
+      40
+    ]
+  ],
+  "themeStyles": {
+    "pink": {
+      "name": "Pastel Pink",
+      "ink": [
+        100,
+        70,
+        78
+      ],
+      "seal": [
+        196,
+        132,
+        146
+      ],
+      "sw": "linear-gradient(135deg,#fbe3e8,#eeb3c0)",
+      "video": "assets/bg_pink.mp4",
+      "card": "assets/card_pink.jpg"
+    },
+    "bblue": {
+      "name": "Baby Blue",
+      "ink": [
+        56,
+        74,
+        98
+      ],
+      "seal": [
+        120,
+        150,
+        186
+      ],
+      "sw": "linear-gradient(135deg,#e5eef8,#b4c9e2)",
+      "video": "assets/bg_bblue.mp4",
+      "card": "assets/card_bblue.jpg"
+    },
+    "neutral": {
+      "name": "Boho Neutral",
+      "ink": [
+        96,
+        80,
+        62
+      ],
+      "seal": [
+        176,
+        146,
+        108
+      ],
+      "sw": "linear-gradient(135deg,#f1e8db,#cdb595)",
+      "video": "assets/bg_neutral.mp4",
+      "card": "assets/card_neutral.jpg"
+    }
+  },
+  "monogram": {
+    "fields": [
+      "honoree"
+    ],
+    "separator": "",
+    "fallback": "baby",
+    "hint": "Leave empty to show \"baby\"."
+  },
+  "reply": {
+    "withDate": "Kindly reply by {month} {day}, {year}",
+    "withoutDate": "Kindly reply"
+  },
+  "dateLine": "{wd}, {month} {day}, {year}",
+  "fileName": "{honoree}",
+  "scenes": [
+    {
+      "start": 6.6,
+      "end": 10.8,
+      "rows": [
+        {
+          "type": "text",
+          "text": "{intro}",
+          "size": 38,
+          "y": 620,
+          "delay": 0.3,
+          "font": "serif",
+          "color": "ink",
+          "options": {
+            "caps": true,
+            "maxw": 780
+          }
+        },
+        {
+          "type": "text",
+          "text": "{title}",
+          "size": 190,
+          "y": 770,
+          "delay": 0.6,
+          "font": "script",
+          "color": "gold"
+        },
+        {
+          "type": "text",
+          "text": "{honor}",
+          "size": 36,
+          "y": 900,
+          "delay": 0.9,
+          "font": "serif",
+          "color": "ink",
+          "options": {
+            "caps": true,
+            "maxw": 780
+          }
+        },
+        {
+          "type": "text",
+          "text": "{honoree}",
+          "size": 150,
+          "y": 1020,
+          "delay": 1.2,
+          "font": "script",
+          "color": "gold",
+          "options": {
+            "maxw": 800
+          }
+        }
+      ]
+    },
+    {
+      "start": 10.8,
+      "end": 14.8,
+      "rows": [
+        {
+          "type": "text",
+          "text": "{invite}",
+          "size": 62,
+          "y": 470,
+          "delay": 0,
+          "font": "ital",
+          "color": "ink",
+          "options": {
+            "maxw": 780
+          }
+        },
+        {
+          "type": "date",
+          "y": 760,
+          "delay": 0.4
+        },
+        {
+          "type": "text",
+          "text": "{time}",
+          "size": 58,
+          "y": 1060,
+          "delay": 1,
+          "font": "ital",
+          "color": "ink",
+          "options": {
+            "maxw": 780
+          }
+        }
+      ]
+    },
+    {
+      "start": 14.8,
+      "end": 18.6,
+      "rows": [
+        {
+          "type": "text",
+          "text": "Where",
+          "size": 40,
+          "y": 470,
+          "delay": 0,
+          "font": "serif",
+          "color": "ink",
+          "options": {
+            "caps": true,
+            "maxw": 780
+          }
+        },
+        {
+          "type": "text",
+          "text": "{venue}",
+          "size": 96,
+          "y": 600,
+          "delay": 0.3,
+          "font": "serif",
+          "color": "ink",
+          "options": {
+            "weight": 600,
+            "maxw": 780
+          }
+        },
+        {
+          "type": "text",
+          "text": "{address}",
+          "size": 56,
+          "y": 720,
+          "delay": 0.6,
+          "font": "ital",
+          "color": "ink",
+          "options": {
+            "maxw": 780
+          }
+        },
+        {
+          "type": "divider",
+          "y": 830,
+          "delay": 0.8
+        },
+        {
+          "type": "text",
+          "text": "{after}",
+          "size": 60,
+          "y": 950,
+          "delay": 1,
+          "font": "ital",
+          "color": "ink",
+          "options": {
+            "maxw": 780
+          }
+        }
+      ]
+    },
+    {
+      "start": 18.6,
+      "end": 23,
+      "rows": [
+        {
+          "type": "text",
+          "text": "{rsvpLine}",
+          "size": 38,
+          "y": 470,
+          "delay": 0,
+          "font": "serif",
+          "color": "ink",
+          "options": {
+            "caps": true,
+            "maxw": 780
+          }
+        },
+        {
+          "type": "text",
+          "text": "{rsvp}",
+          "size": 70,
+          "y": 590,
+          "delay": 0.3,
+          "font": "serif",
+          "color": "ink",
+          "options": {
+            "weight": 600,
+            "maxw": 780
+          }
+        },
+        {
+          "type": "divider",
+          "y": 710,
+          "delay": 0.6
+        },
+        {
+          "type": "text",
+          "text": "{closing1}",
+          "size": 118,
+          "y": 860,
+          "delay": 0.9,
+          "font": "script",
+          "color": "gold"
+        },
+        {
+          "type": "text",
+          "text": "{closing2}",
+          "size": 118,
+          "y": 990,
+          "delay": 1.2,
+          "font": "script",
+          "color": "gold"
+        }
+      ]
+    }
+  ],
+  "card": {
+    "offsetY": 40,
+    "rows": [
+      {
+        "type": "text",
+        "text": "{intro}",
+        "size": 40,
+        "y": 640,
+        "delay": 0,
+        "font": "serif",
+        "color": "ink",
+        "options": {
+          "caps": true,
+          "maxw": 1000
+        }
+      },
+      {
+        "type": "text",
+        "text": "{title}",
+        "size": 210,
+        "y": 790,
+        "delay": 0,
+        "font": "script",
+        "color": "gold",
+        "options": {
+          "shimmer": false,
+          "maxw": 1100
+        }
+      },
+      {
+        "type": "text",
+        "text": "{honor}",
+        "size": 38,
+        "y": 920,
+        "delay": 0,
+        "font": "serif",
+        "color": "ink",
+        "options": {
+          "caps": true,
+          "maxw": 1000
+        }
+      },
+      {
+        "type": "text",
+        "text": "{honoree}",
+        "size": 160,
+        "y": 1040,
+        "delay": 0,
+        "font": "script",
+        "color": "gold",
+        "options": {
+          "shimmer": false,
+          "maxw": 1100
+        }
+      },
+      {
+        "type": "text",
+        "text": "{invite}",
+        "size": 56,
+        "y": 1180,
+        "delay": 0,
+        "font": "ital",
+        "color": "ink",
+        "options": {
+          "maxw": 1100
+        }
+      },
+      {
+        "type": "text",
+        "text": "{dateLine}",
+        "size": 64,
+        "y": 1280,
+        "delay": 0,
+        "font": "serif",
+        "color": "ink",
+        "options": {
+          "weight": 600,
+          "maxw": 1100
+        }
+      },
+      {
+        "type": "text",
+        "text": "{time}",
+        "size": 52,
+        "y": 1360,
+        "delay": 0,
+        "font": "ital",
+        "color": "ink",
+        "options": {
+          "maxw": 1100
+        }
+      },
+      {
+        "type": "text",
+        "text": "{venue}",
+        "size": 66,
+        "y": 1450,
+        "delay": 0,
+        "font": "serif",
+        "color": "ink",
+        "options": {
+          "weight": 600,
+          "maxw": 1100
+        }
+      },
+      {
+        "type": "text",
+        "text": "{address}",
+        "size": 48,
+        "y": 1520,
+        "delay": 0,
+        "font": "ital",
+        "color": "ink",
+        "options": {
+          "maxw": 1100
+        }
+      },
+      {
+        "type": "text",
+        "text": "{rsvpLine}  |  {rsvp}",
+        "size": 36,
+        "y": 1610,
+        "delay": 0,
+        "font": "serif",
+        "color": "ink",
+        "options": {
+          "weight": 500,
+          "maxw": 1100
+        }
+      }
+    ]
+  }
+}

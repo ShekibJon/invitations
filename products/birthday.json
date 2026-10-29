@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "title": "Your birthday invitation",
+  "themes": ["bdaygold", "bdaykids"],
+  "fields": [
+    ["name", "Birthday person's name", "Alexandra-Charlotte", 30],
+    ["age", "Age", "10", 3],
+    ["titleLine", "Title line", "You're invited to", 34],
+    ["date", "Party date", "2027-02-13", 0, "date"],
+    ["time", "Time line", "from two until five", 44],
+    ["venue", "Place", "The Party Room", 30],
+    ["address", "Address", "22 Rose Street, Stockholm", 44],
+    ["rsvp", "RSVP: link, email or phone", "party@example.com", 34]
+  ],
+  "more": [
+    ["rsvpDate", "Reply by (date)", "2027-02-01", 0, "date"],
+    ["extra", "Extra line", "Cake, games and lots of fun", 44],
+    ["closing", "Closing line", "Let's celebrate together", 50],
+    ["monogram", "Initial on the wax seal", "", 3]
+  ],
+  "themeStyles": {
+    "bdaygold": {
+      "name": "Blush and Gold",
+      "ink": [91, 67, 54],
+      "seal": [181, 133, 70],
+      "sw": "linear-gradient(135deg,#f6ded9,#c99c63)",
+      "video": "assets/bg_bdaygold.mp4",
+      "card": "assets/card_bdaygold.jpg"
+    },
+    "bdaykids": {
+      "name": "Colorful Balloons",
+      "ink": [72, 66, 105],
+      "seal": [95, 156, 150],
+      "sw": "linear-gradient(135deg,#73cfc2,#8776c8,#f2c84b)",
+      "video": "assets/bg_bdaykids.mp4",
+      "card": "assets/card_bdaykids.jpg"
+    }
+  },
+  "monogram": {
+    "fields": ["name"],
+    "separator": "",
+    "fallback": "",
+    "hint": "Leave empty to use the first initial automatically."
+  },
+  "reply": {
+    "withDate": "Kindly reply by {month} {day}, {year}",
+    "withoutDate": "Kindly reply"
+  },
+  "dateLine": "{wd}, {month} {day}, {year}",
+  "fileName": "Birthday_{name}",
+  "scenes": [
+    {
+      "start": 6.6,
+      "end": 10.8,
+      "rows": [
+        {"type": "text", "text": "{titleLine}", "size": 44, "y": 450, "delay": 0, "font": "serif", "color": "ink", "options": {"caps": true, "maxw": 780}},
+        {"type": "text", "text": "{name}", "size": 170, "y": 650, "delay": 0.35, "font": "script", "color": "gold", "options": {"maxw": 800}},
+        {"type": "text", "text": "IS TURNING", "size": 38, "y": 800, "delay": 0.7, "font": "serif", "color": "ink", "options": {"caps": true, "maxw": 700}},
+        {"type": "text", "text": "{age}", "size": 260, "y": 1020, "delay": 1.0, "font": "script", "color": "gold", "options": {"maxw": 500}}
+      ]
+    },
+    {
+      "start": 10.8,
+      "end": 14.8,
+      "rows": [
+        {"type": "text", "text": "Join us to celebrate", "size": 58, "y": 470, "delay": 0, "font": "ital", "color": "ink", "options": {"maxw": 780}},
+        {"type": "date", "y": 760, "delay": 0.4},
+        {"type": "text", "text": "{time}", "size": 58, "y": 1060, "delay": 1.0, "font": "ital", "color": "ink", "options": {"maxw": 780}}
+      ]
+    },
+    {
+      "start": 14.8,
+      "end": 18.6,
+      "rows": [
+        {"type": "text", "text": "WHERE", "size": 40, "y": 470, "delay": 0, "font": "serif", "color": "ink", "options": {"caps": true, "maxw": 780}},
+        {"type": "text", "text": "{venue}", "size": 92, "y": 620, "delay": 0.3, "font": "serif", "color": "ink", "options": {"weight": 600, "maxw": 780}},
+        {"type": "text", "text": "{address}", "size": 54, "y": 740, "delay": 0.6, "font": "ital", "color": "ink", "options": {"maxw": 780}},
+        {"type": "divider", "y": 860, "delay": 0.8},
+        {"type": "text", "text": "{extra}", "size": 58, "y": 990, "delay": 1.0, "font": "ital", "color": "ink", "options": {"maxw": 780}}
+      ]
+    },
+    {
+      "start": 18.6,
+      "end": 23,
+      "rows": [
+        {"type": "text", "text": "{rsvpLine}", "size": 38, "y": 500, "delay": 0, "font": "serif", "color": "ink", "options": {"caps": true, "maxw": 780}},
+        {"type": "text", "text": "{rsvp}", "size": 68, "y": 630, "delay": 0.3, "font": "serif", "color": "ink", "options": {"weight": 600, "maxw": 780}},
+        {"type": "divider", "y": 760, "delay": 0.6},
+        {"type": "text", "text": "See you there!", "size": 135, "y": 930, "delay": 0.9, "font": "script", "color": "gold", "options": {"maxw": 780}}
+      ]
+    }
+  ],
+  "card": {
+    "offsetY": 0,
+    "rows": [
+      {"type": "text", "text": "{titleLine}", "size": 40, "y": 570, "delay": 0, "font": "serif", "color": "ink", "options": {"caps": true, "maxw": 1000}},
+      {"type": "text", "text": "{name}", "size": 168, "y": 735, "delay": 0, "font": "script", "color": "gold", "options": {"shimmer": false, "maxw": 1120}},
+      {"type": "text", "text": "IS TURNING {age}", "size": 62, "y": 875, "delay": 0, "font": "serif", "color": "ink", "options": {"weight": 600, "maxw": 1000}},
+      {"type": "text", "text": "{dateLine}", "size": 62, "y": 1030, "delay": 0, "font": "serif", "color": "ink", "options": {"weight": 600, "maxw": 1100}},
+      {"type": "text", "text": "{time}", "size": 50, "y": 1110, "delay": 0, "font": "ital", "color": "ink", "options": {"maxw": 1100}},
+      {"type": "text", "text": "{venue}", "size": 66, "y": 1230, "delay": 0, "font": "serif", "color": "ink", "options": {"weight": 600, "maxw": 1100}},
+      {"type": "text", "text": "{address}", "size": 46, "y": 1310, "delay": 0, "font": "ital", "color": "ink", "options": {"maxw": 1100}},
+      {"type": "text", "text": "{extra}", "size": 46, "y": 1410, "delay": 0, "font": "ital", "color": "ink", "options": {"maxw": 1100}},
+      {"type": "text", "text": "{rsvpLine}  |  {rsvp}", "size": 34, "y": 1530, "delay": 0, "font": "serif", "color": "ink", "options": {"weight": 500, "maxw": 1100}}
+    ]
+  },
+  "artworkNote": "Approved birthday balloon artwork. Working PNG copies are level-adjusted to a clean white background."
+}

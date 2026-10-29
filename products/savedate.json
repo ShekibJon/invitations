@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "title": "Your Save the Date invitation",
+  "themes": ["blush", "sage", "blue"],
+  "fields": [
+    ["names", "Names", "Alexandra-Charlotte & Christopher", 50],
+    ["date", "Wedding date", "2027-08-21", 0, "date"],
+    ["city", "City", "Stockholm, Sweden", 40],
+    ["follow", "Follow-up line", "Formal invitation to follow", 44],
+    ["website", "Wedding website (optional)", "", 60]
+  ],
+  "more": [
+    ["monogram", "Initials on the wax seal", "", 5],
+    ["topLine", "Top line", "Save the date", 34],
+    ["closing", "Closing line", "We cannot wait to celebrate with you", 50]
+  ],
+  "themeStyles": {
+    "blush": {
+      "name": "Blush",
+      "ink": [92, 70, 64],
+      "seal": [176, 120, 112],
+      "sw": "linear-gradient(135deg,#f6dcd6,#e9b9ac)",
+      "video": "assets/bg_blush.mp4",
+      "card": "assets/card_blush.jpg"
+    },
+    "sage": {
+      "name": "Sage Green",
+      "ink": [60, 74, 58],
+      "seal": [112, 132, 104],
+      "sw": "linear-gradient(135deg,#dfe6d8,#a9b99c)",
+      "video": "assets/bg_sage.mp4",
+      "card": "assets/card_sage.jpg"
+    },
+    "blue": {
+      "name": "Dusty Blue",
+      "ink": [50, 64, 88],
+      "seal": [92, 114, 148],
+      "sw": "linear-gradient(135deg,#e4ebf4,#9fb1ca)",
+      "video": "assets/bg_blue.mp4",
+      "card": "assets/card_blue.jpg"
+    }
+  },
+  "monogram": {
+    "fields": ["names"],
+    "separator": "",
+    "fallback": "",
+    "hint": "Leave empty to use the first two initials automatically."
+  },
+  "reply": {
+    "withDate": "",
+    "withoutDate": ""
+  },
+  "dateLine": "{wd}, {month} {day}, {year}",
+  "fileName": "Save_the_Date_{names}",
+  "scenes": [
+    {
+      "start": 6.6,
+      "end": 11.2,
+      "rows": [
+        {"type": "text", "text": "{topLine}", "size": 48, "y": 480, "delay": 0, "font": "serif", "color": "ink", "options": {"caps": true, "maxw": 780}},
+        {"type": "text", "text": "{names}", "size": 175, "y": 760, "delay": 0.4, "font": "script", "color": "gold", "options": {"maxw": 820}},
+        {"type": "divider", "y": 980, "delay": 0.9}
+      ]
+    },
+    {
+      "start": 11.2,
+      "end": 15.8,
+      "rows": [
+        {"type": "text", "text": "OUR WEDDING DAY", "size": 42, "y": 440, "delay": 0, "font": "serif", "color": "ink", "options": {"caps": true, "maxw": 780}},
+        {"type": "date", "y": 760, "delay": 0.35},
+        {"type": "text", "text": "{city}", "size": 70, "y": 1110, "delay": 0.9, "font": "ital", "color": "ink", "options": {"maxw": 780}}
+      ]
+    },
+    {
+      "start": 15.8,
+      "end": 19.4,
+      "rows": [
+        {"type": "text", "text": "{follow}", "size": 72, "y": 590, "delay": 0, "font": "ital", "color": "ink", "options": {"maxw": 780}},
+        {"type": "divider", "y": 760, "delay": 0.5},
+        {"type": "text", "text": "{website}", "size": 58, "y": 900, "delay": 0.8, "font": "serif", "color": "ink", "options": {"weight": 600, "maxw": 780}}
+      ]
+    },
+    {
+      "start": 19.4,
+      "end": 23,
+      "rows": [
+        {"type": "text", "text": "{closing}", "size": 116, "y": 720, "delay": 0, "font": "script", "color": "gold", "options": {"maxw": 800}},
+        {"type": "text", "text": "{names}", "size": 78, "y": 990, "delay": 0.7, "font": "serif", "color": "ink", "options": {"maxw": 800}}
+      ]
+    }
+  ],
+  "card": {
+    "offsetY": 0,
+    "rows": [
+      {"type": "text", "text": "{topLine}", "size": 44, "y": 580, "delay": 0, "font": "serif", "color": "ink", "options": {"caps": true, "maxw": 1000}},
+      {"type": "text", "text": "{names}", "size": 175, "y": 785, "delay": 0, "font": "script", "color": "gold", "options": {"shimmer": false, "maxw": 1120}},
+      {"type": "text", "text": "{dateLine}", "size": 70, "y": 1020, "delay": 0, "font": "serif", "color": "ink", "options": {"weight": 600, "maxw": 1100}},
+      {"type": "text", "text": "{city}", "size": 58, "y": 1130, "delay": 0, "font": "ital", "color": "ink", "options": {"maxw": 1100}},
+      {"type": "divider", "y": 1240, "delay": 0},
+      {"type": "text", "text": "{follow}", "size": 52, "y": 1350, "delay": 0, "font": "ital", "color": "ink", "options": {"maxw": 1100}},
+      {"type": "text", "text": "{website}", "size": 42, "y": 1450, "delay": 0, "font": "serif", "color": "ink", "options": {"weight": 600, "maxw": 1100}}
+    ]
+  },
+  "artworkNote": "Reuses the approved wedding blush, sage and dusty blue backgrounds."
+}

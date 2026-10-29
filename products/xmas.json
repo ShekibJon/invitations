@@ -1,0 +1,505 @@
+{
+  "schemaVersion": 1,
+  "title": "Your Christmas party invitation",
+  "themes": [
+    "xmasred",
+    "xmaswhite",
+    "xmascozy"
+  ],
+  "fields": [
+    [
+      "title",
+      "Party title",
+      "Christmas Party",
+      30
+    ],
+    [
+      "host",
+      "Host name(s)",
+      "Emma and Liam",
+      30
+    ],
+    [
+      "date",
+      "Party date",
+      "2026-12-19",
+      0,
+      "date"
+    ],
+    [
+      "time",
+      "Time line",
+      "at seven in the evening",
+      44
+    ],
+    [
+      "venue",
+      "Place",
+      "The Garden Room",
+      30
+    ],
+    [
+      "address",
+      "Address",
+      "22 Rose Street, Stockholm",
+      44
+    ],
+    [
+      "dressCode",
+      "Dress code",
+      "Festive and cozy",
+      36
+    ],
+    [
+      "rsvp",
+      "RSVP: link, email or phone",
+      "party@example.com",
+      34
+    ]
+  ],
+  "more": [
+    [
+      "rsvpDate",
+      "Reply by (date)",
+      "2026-12-05",
+      0,
+      "date"
+    ],
+    [
+      "monogram",
+      "Initials on the wax seal",
+      "",
+      5
+    ],
+    [
+      "intro",
+      "Top line",
+      "Please join us for a",
+      34
+    ],
+    [
+      "invite",
+      "Invite line",
+      "An evening of festive cheer",
+      44
+    ],
+    [
+      "closing",
+      "Closing line",
+      "Celebrate the season with us",
+      40
+    ]
+  ],
+  "themeStyles": {
+    "xmasred": {
+      "name": "Red and Gold",
+      "ink": [
+        126,
+        91,
+        35
+      ],
+      "seal": [
+        150,
+        104,
+        39
+      ],
+      "sw": "linear-gradient(135deg,#7b1f28,#b8924a)",
+      "video": "assets/bg_xmasred.mp4",
+      "card": "assets/card_xmasred.jpg"
+    },
+    "xmaswhite": {
+      "name": "Winter White",
+      "ink": [
+        69,
+        85,
+        103
+      ],
+      "seal": [
+        115,
+        139,
+        159
+      ],
+      "sw": "linear-gradient(135deg,#f4f8fa,#b9c9d7)",
+      "video": "assets/bg_xmaswhite.mp4",
+      "card": "assets/card_xmaswhite.jpg"
+    },
+    "xmascozy": {
+      "name": "Cozy Orange",
+      "ink": [
+        91,
+        53,
+        31
+      ],
+      "seal": [
+        160,
+        82,
+        40
+      ],
+      "sw": "linear-gradient(135deg,#e29a53,#8b4622)",
+      "video": "assets/bg_xmascozy.mp4",
+      "card": "assets/card_xmascozy.jpg"
+    }
+  },
+  "monogram": {
+    "fields": [
+      "host"
+    ],
+    "separator": "",
+    "fallback": "",
+    "hint": "Leave empty to use your initials automatically."
+  },
+  "reply": {
+    "withDate": "Kindly reply by {month} {day}, {year}",
+    "withoutDate": "Kindly reply"
+  },
+  "dateLine": "{wd}, {month} {day}, {year}",
+  "fileName": "{title}_{host}",
+  "scenes": [
+    {
+      "start": 6.6,
+      "end": 10.8,
+      "rows": [
+        {
+          "type": "text",
+          "text": "{intro}",
+          "size": 38,
+          "y": 470,
+          "delay": 0,
+          "font": "serif",
+          "color": "ink",
+          "options": {
+            "caps": true,
+            "maxw": 780
+          }
+        },
+        {
+          "type": "text",
+          "text": "{title}",
+          "size": 180,
+          "y": 660,
+          "delay": 0.35,
+          "font": "script",
+          "color": "gold"
+        },
+        {
+          "type": "text",
+          "text": "Hosted by",
+          "size": 38,
+          "y": 810,
+          "delay": 0.7,
+          "font": "serif",
+          "color": "ink",
+          "options": {
+            "caps": true,
+            "maxw": 780
+          }
+        },
+        {
+          "type": "text",
+          "text": "{host}",
+          "size": 150,
+          "y": 950,
+          "delay": 1,
+          "font": "script",
+          "color": "gold"
+        }
+      ]
+    },
+    {
+      "start": 10.8,
+      "end": 14.8,
+      "rows": [
+        {
+          "type": "text",
+          "text": "{invite}",
+          "size": 62,
+          "y": 470,
+          "delay": 0,
+          "font": "ital",
+          "color": "ink",
+          "options": {
+            "maxw": 780
+          }
+        },
+        {
+          "type": "date",
+          "y": 760,
+          "delay": 0.4
+        },
+        {
+          "type": "text",
+          "text": "{time}",
+          "size": 58,
+          "y": 1060,
+          "delay": 1,
+          "font": "ital",
+          "color": "ink",
+          "options": {
+            "maxw": 780
+          }
+        }
+      ]
+    },
+    {
+      "start": 14.8,
+      "end": 18.6,
+      "rows": [
+        {
+          "type": "text",
+          "text": "Where",
+          "size": 40,
+          "y": 470,
+          "delay": 0,
+          "font": "serif",
+          "color": "ink",
+          "options": {
+            "caps": true,
+            "maxw": 780
+          }
+        },
+        {
+          "type": "text",
+          "text": "{venue}",
+          "size": 96,
+          "y": 600,
+          "delay": 0.3,
+          "font": "serif",
+          "color": "ink",
+          "options": {
+            "weight": 600,
+            "maxw": 780
+          }
+        },
+        {
+          "type": "text",
+          "text": "{address}",
+          "size": 56,
+          "y": 720,
+          "delay": 0.6,
+          "font": "ital",
+          "color": "ink",
+          "options": {
+            "maxw": 780
+          }
+        },
+        {
+          "type": "divider",
+          "y": 830,
+          "delay": 0.8
+        },
+        {
+          "type": "text",
+          "text": "Dress code: {dressCode}",
+          "size": 60,
+          "y": 950,
+          "delay": 1,
+          "font": "ital",
+          "color": "ink",
+          "options": {
+            "maxw": 780
+          }
+        }
+      ]
+    },
+    {
+      "start": 18.6,
+      "end": 23,
+      "rows": [
+        {
+          "type": "text",
+          "text": "{rsvpLine}",
+          "size": 38,
+          "y": 470,
+          "delay": 0,
+          "font": "serif",
+          "color": "ink",
+          "options": {
+            "caps": true,
+            "maxw": 780
+          }
+        },
+        {
+          "type": "text",
+          "text": "{rsvp}",
+          "size": 70,
+          "y": 590,
+          "delay": 0.3,
+          "font": "serif",
+          "color": "ink",
+          "options": {
+            "weight": 600,
+            "maxw": 780
+          }
+        },
+        {
+          "type": "divider",
+          "y": 710,
+          "delay": 0.6
+        },
+        {
+          "type": "text",
+          "text": "{closing1}",
+          "size": 118,
+          "y": 860,
+          "delay": 0.9,
+          "font": "script",
+          "color": "gold"
+        },
+        {
+          "type": "text",
+          "text": "{closing2}",
+          "size": 118,
+          "y": 990,
+          "delay": 1.2,
+          "font": "script",
+          "color": "gold"
+        }
+      ]
+    }
+  ],
+  "card": {
+    "offsetY": 0,
+    "rows": [
+      {
+        "type": "text",
+        "text": "{intro}",
+        "size": 40,
+        "y": 570,
+        "delay": 0,
+        "font": "serif",
+        "color": "ink",
+        "options": {
+          "caps": true,
+          "maxw": 1000
+        }
+      },
+      {
+        "type": "text",
+        "text": "{title}",
+        "size": 180,
+        "y": 730,
+        "delay": 0,
+        "font": "script",
+        "color": "gold",
+        "options": {
+          "shimmer": false,
+          "maxw": 1100
+        }
+      },
+      {
+        "type": "text",
+        "text": "Hosted by",
+        "size": 34,
+        "y": 865,
+        "delay": 0,
+        "font": "serif",
+        "color": "ink",
+        "options": {
+          "caps": true,
+          "maxw": 1000
+        }
+      },
+      {
+        "type": "text",
+        "text": "{host}",
+        "size": 145,
+        "y": 990,
+        "delay": 0,
+        "font": "script",
+        "color": "gold",
+        "options": {
+          "shimmer": false,
+          "maxw": 1100
+        }
+      },
+      {
+        "type": "text",
+        "text": "{invite}",
+        "size": 56,
+        "y": 1090,
+        "delay": 0,
+        "font": "ital",
+        "color": "ink",
+        "options": {
+          "maxw": 1100
+        }
+      },
+      {
+        "type": "text",
+        "text": "{dateLine}",
+        "size": 64,
+        "y": 1180,
+        "delay": 0,
+        "font": "serif",
+        "color": "ink",
+        "options": {
+          "weight": 600,
+          "maxw": 1100
+        }
+      },
+      {
+        "type": "text",
+        "text": "{time}",
+        "size": 52,
+        "y": 1260,
+        "delay": 0,
+        "font": "ital",
+        "color": "ink",
+        "options": {
+          "maxw": 1100
+        }
+      },
+      {
+        "type": "text",
+        "text": "{venue}",
+        "size": 66,
+        "y": 1350,
+        "delay": 0,
+        "font": "serif",
+        "color": "ink",
+        "options": {
+          "weight": 600,
+          "maxw": 1100
+        }
+      },
+      {
+        "type": "text",
+        "text": "{address}",
+        "size": 48,
+        "y": 1420,
+        "delay": 0,
+        "font": "ital",
+        "color": "ink",
+        "options": {
+          "maxw": 1100
+        }
+      },
+      {
+        "type": "text",
+        "text": "Dress code: {dressCode}",
+        "size": 42,
+        "y": 1500,
+        "delay": 0,
+        "font": "ital",
+        "color": "ink",
+        "options": {
+          "maxw": 1100
+        }
+      },
+      {
+        "type": "text",
+        "text": "{rsvpLine}  |  {rsvp}",
+        "size": 36,
+        "y": 1570,
+        "delay": 0,
+        "font": "serif",
+        "color": "ink",
+        "options": {
+          "weight": 500,
+          "maxw": 1100
+        }
+      }
+    ]
+  },
+  "artworkNote": "Approved Christmas watercolor artwork for the red, winter white and cozy themes."
+}

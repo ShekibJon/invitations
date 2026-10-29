@@ -81,8 +81,8 @@ footer { text-align: center; color: var(--muted); font-size: 14px; margin-top: 3
       <div class="panel">
         <div class="step" style="justify-content:center"><b>3</b> Preview and download</div>
         <div class="stage"><canvas id="cv" width="1080" height="1920"></canvas></div>
-        <button class="btn soft" id="playBtn" type="button">&#9654; Play preview</button>
-        <button class="btn main" id="videoBtn" type="button">Download my video</button>
+        <button class="btn soft" id="playBtn" type="button" disabled>&#9654; Play preview</button>
+        <button class="btn main" id="videoBtn" type="button" disabled>Download my video</button>
         <div class="progress" id="prog"><div></div></div>
         <div class="status" id="status"></div>
         <div class="done" id="done">
@@ -92,7 +92,7 @@ footer { text-align: center; color: var(--muted); font-size: 14px; margin-top: 3
             <li>Send it in WhatsApp, Messages or email like any video.</li>
           </ol>
         </div>
-        <button class="btn soft" id="cardBtn" type="button">Download printable 5x7 card</button>
+        <button class="btn soft" id="cardBtn" type="button" disabled>Download printable 5x7 card</button>
       </div>
     </aside>
   </div>
@@ -101,70 +101,16 @@ footer { text-align: center; color: var(--muted); font-size: 14px; margin-top: 3
 
 <video id="bgv" playsinline muted preload="auto" crossorigin="anonymous" style="display:none"></video>
 
-<script>
+<script type="module">
+import { loadProduct, formatText, dateParts } from "./product-config.js";
+(async () => {
 "use strict";
 /* ---------------- product setup ---------------- */
-const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-const DAYS = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-const THEMES = {
-  blush:   { name: "Blush",        ink: [92,70,64],  seal: [176,120,112], sw: "linear-gradient(135deg,#f6dcd6,#e9b9ac)" },
-  sage:    { name: "Sage Green",   ink: [60,74,58],  seal: [112,132,104], sw: "linear-gradient(135deg,#dfe6d8,#a9b99c)" },
-  blue:    { name: "Dusty Blue",   ink: [50,64,88],  seal: [92,114,148],  sw: "linear-gradient(135deg,#dde5ef,#9fb1c9)" },
-  pink:    { name: "Pastel Pink",  ink: [100,70,78], seal: [196,132,146], sw: "linear-gradient(135deg,#fbe3e8,#eeb3c0)" },
-  bblue:   { name: "Baby Blue",    ink: [56,74,98],  seal: [120,150,186], sw: "linear-gradient(135deg,#e5eef8,#b4c9e2)" },
-  neutral: { name: "Boho Neutral", ink: [96,80,62],  seal: [176,146,108], sw: "linear-gradient(135deg,#f1e8db,#cdb595)" }
-};
-const PRODUCTS = {
-  wedding: {
-    title: "Your wedding invitation", themes: ["blush","sage","blue"],
-    fields: [
-      ["name1", "First name", "Emma", 18], ["name2", "Second name", "Liam", 18],
-      ["date", "Wedding date", "2027-06-12", 0, "date"], ["time", "Time line", "at four o'clock in the afternoon", 44],
-      ["venue", "Venue name", "Villa Rosendal", 30], ["address", "Venue address", "Rosendalsvagen 1, Stockholm", 44],
-      ["rsvpDate", "Reply by (date)", "2027-05-01", 0, "date"], ["rsvp", "RSVP: link, email or phone", "emmaandliam.com", 34]
-    ],
-    more: [
-      ["monogram", "Initials on the wax seal", "", 5], ["intro", "Top line", "Together with their families", 34],
-      ["invite", "Invite line", "invite you to celebrate their wedding", 44], ["after", "After the venue", "Dinner and dancing to follow", 40],
-      ["closing", "Closing line", "We can't wait to celebrate with you", 40]
-    ]
-  },
-  bridal: {
-    title: "Your bridal shower invitation", themes: ["blush","sage","blue"],
-    fields: [
-      ["honoree", "Name of the bride to be", "Emma Miller", 22], ["date", "Shower date", "2027-05-15", 0, "date"],
-      ["time", "Time line", "at eleven o'clock in the morning", 44], ["venue", "Venue name", "The Garden Room", 30],
-      ["address", "Venue address", "22 Rose Street, Stockholm", 44], ["after", "Hosted by", "Hosted by Anna and Sara", 40],
-      ["rsvpDate", "Reply by (date)", "2027-05-01", 0, "date"], ["rsvp", "RSVP: link, email or phone", "anna@email.com", 34]
-    ],
-    more: [
-      ["monogram", "Initial on the wax seal", "", 3], ["intro", "Top line", "Please join us for a", 34], ["title", "Title", "Bridal Shower", 18],
-      ["honor", "Line before the name", "honoring", 26], ["invite", "Invite line", "for an afternoon of brunch and bubbly", 44],
-      ["closing", "Closing line", "Let's celebrate the bride to be", 40]
-    ]
-  },
-  baby: {
-    title: "Your baby shower invitation", themes: ["pink","bblue","neutral"],
-    fields: [
-      ["honoree", "Name of mom to be (or parents)", "Sofia Andersson", 22], ["honor", "Line before the name", "honoring mom to be", 26, "select",
-        ["honoring mom to be", "honoring parents to be", "honoring dad to be", "honoring"]],
-      ["date", "Shower date", "2027-03-20", 0, "date"], ["time", "Time line", "at two o'clock in the afternoon", 44],
-      ["venue", "Venue name", "The Rose Cafe", 30], ["address", "Venue address", "10 Park Street, Stockholm", 44],
-      ["after", "Hosted by", "Hosted by Grandma Lena", 40], ["rsvpDate", "Reply by (date)", "2027-03-01", 0, "date"],
-      ["rsvp", "RSVP: link, email or phone", "lena@email.com", 34]
-    ],
-    more: [
-      ["monogram", "Text on the wax seal", "baby", 5], ["intro", "Top line", "Please join us for a", 34], ["title", "Title", "Baby Shower", 18],
-      ["invite", "Invite line", "A little one is on the way", 44], ["closing", "Closing line", "We can't wait to meet the baby", 40]
-    ]
-  }
-};
-const qs = new URLSearchParams(location.search);
-const KIND = PRODUCTS[qs.get("p")] ? qs.get("p") : "wedding";
-const P = PRODUCTS[KIND];
+const { key: KIND, product: P } = await loadProduct();
+const THEMES = P.themeStyles;
 const STORE = "shopystar_" + KIND;
 let state = {}; let theme = P.themes[0];
-try { const s = JSON.parse(localStorage.getItem(STORE) || "{}"); if (s.v) state = s.v; if (s.theme && P.themes.includes(s.theme)) theme = s.theme; } catch (e) {}
+try { const s = JSON.parse(localStorage.getItem(STORE) || "{}"); if (s.v && typeof s.v === "object" && !Array.isArray(s.v)) state = Object.fromEntries(Object.entries(s.v).filter(([, v]) => typeof v === "string")); if (s.theme && P.themes.includes(s.theme)) theme = s.theme; } catch (e) {}
 document.getElementById("pageTitle").textContent = P.title;
 
 /* ---------------- form ---------------- */
@@ -185,7 +131,7 @@ function buildField(f, parent) {
   el.addEventListener("input", () => { state[key] = el.value; save(); draw(curT); });
   if (state[key] === undefined) state[key] = el.value;
   parent.appendChild(lab); parent.appendChild(el);
-  if (key === "monogram") { const h = document.createElement("p"); h.className = "hint"; h.textContent = KIND === "baby" ? "Leave empty to show \"baby\"." : "Leave empty to use your initials automatically."; parent.appendChild(h); }
+  if (key === "monogram") { const h = document.createElement("p"); h.className = "hint"; h.textContent = P.monogram.hint; parent.appendChild(h); }
 }
 const form = document.getElementById("form"), formMore = document.getElementById("formMore");
 P.fields.forEach(f => buildField(f, form)); P.more.forEach(f => buildField(f, formMore));
@@ -194,26 +140,25 @@ function save() { try { localStorage.setItem(STORE, JSON.stringify({ v: state, t
 const swWrap = document.getElementById("swatches");
 P.themes.forEach(k => {
   const b = document.createElement("button"); b.type = "button"; b.className = "sw"; b.setAttribute("aria-pressed", k === theme);
-  b.innerHTML = `<span style="background:${THEMES[k].sw}"></span>${THEMES[k].name}`;
+  const swatch = document.createElement("span"); swatch.style.background = THEMES[k].sw;
+  b.append(swatch, document.createTextNode(THEMES[k].name));
   b.onclick = () => { theme = k; save(); [...swWrap.children].forEach(c => c.setAttribute("aria-pressed", c === b)); loadTheme(); };
   swWrap.appendChild(b);
 });
 
 /* ---------------- values ---------------- */
 function val(k) { const v = (state[k] || "").trim(); if (v) return v; const all = P.fields.concat(P.more); const f = all.find(x => x[0] === k); return f ? f[2] : ""; }
-function dparts(k) { const s = val(k); const d = new Date(s + "T12:00:00"); if (isNaN(d)) return null; return { wd: DAYS[d.getDay()], day: String(d.getDate()), month: MONTHS[d.getMonth()], year: String(d.getFullYear()) }; }
+function dparts(k) { return dateParts(val(k), P.lang || "en"); }
 function V() {
-  const d = dparts("date") || { wd: "", day: "", month: "", year: "" }; const r = dparts("rsvpDate");
-  const o = { wd: d.wd, day: d.day, month: d.month, year: d.year, time: val("time"), venue: val("venue"), address: val("address"),
-    after: val("after"), rsvp: val("rsvp"), invite: val("invite"), closing: val("closing"), intro: val("intro"),
-    rsvpLine: r ? `Kindly reply by ${r.month} ${r.day}, ${r.year}` : "Kindly reply" };
-  if (KIND === "wedding") {
-    o.name1 = val("name1"); o.name2 = val("name2");
-    o.mono = (state.monogram || "").trim() || ((o.name1[0] || "") + "&" + (o.name2[0] || ""));
-  } else {
-    o.title = val("title"); o.honor = val("honor"); o.honoree = val("honoree");
-    o.mono = (state.monogram || "").trim() || (KIND === "baby" ? "baby" : (o.honoree[0] || ""));
-  }
+  const o = Object.fromEntries(P.fields.concat(P.more).map(([key]) => [key, val(key)]));
+  const d = dparts("date") || { wd: "", day: "", month: "", year: "" };
+  const r = dparts("rsvpDate");
+  Object.assign(o, d);
+  o.rsvpLine = r ? formatText(P.reply.withDate, r) : P.reply.withoutDate;
+  o.mono = (state.monogram || "").trim() || P.monogram.fallback || P.monogram.fields.map(key => (o[key] || "")[0] || "").join(P.monogram.separator);
+  const words = o.closing.split(/\s+/), half = Math.ceil(words.length / 2);
+  o.closing1 = words.slice(0, half).join(" "); o.closing2 = words.slice(half).join(" ");
+  o.dateLine = formatText(P.dateLine, o);
   return o;
 }
 
@@ -277,18 +222,12 @@ function dateBlock(c, v, yc, alpha, t, ink) {
 }
 
 /* ---------------- scenes (same timing as the designed video) ---------------- */
-function scenes(v) {
-  const ink = THEMES[theme].ink; const w = v.closing.split(/\s+/); const half = Math.ceil(w.length / 2);
-  const c1 = w.slice(0, half).join(" "), c2 = w.slice(half).join(" ");
-  let first;
-  if (KIND === "wedding") first = [6.6, 10.8, [["cap", v.intro, 40, 470, 0], ["gold", v.name1, 250, 680, .35], ["ink", "&", 140, 850, .7, "script"], ["gold", v.name2, 250, 1020, 1.0]]];
-  else if (KIND === "bridal") first = [6.6, 10.8, [["cap", v.intro, 40, 460, 0], ["gold", v.title, 220, 640, .35], ["cap", v.honor, 38, 800, .7], ["gold", v.honoree, 170, 940, 1.0]]];
-  else first = [6.6, 10.8, [["cap", v.intro, 38, 620, .3], ["gold", v.title, 190, 770, .6], ["cap", v.honor, 36, 900, .9], ["gold", v.honoree, 150, 1020, 1.2]]];
-  return [first,
-    [10.8, 14.8, [["ital", v.invite, 62, 470, 0], ["date", "", 0, 760, .4], ["ital", v.time, 58, 1060, 1.0]]],
-    [14.8, 18.6, [["cap", "Where", 40, 470, 0], ["serifb", v.venue, 96, 600, .3], ["ital", v.address, 56, 720, .6], ["div", "", 0, 830, .8], ["ital", v.after, 60, 950, 1.0]]],
-    [18.6, DUR + 1, [["cap", v.rsvpLine, 38, 470, 0], ["serifb", v.rsvp, 70, 590, .3], ["div", "", 0, 710, .6], ["gold", c1, 118, 860, .9], ["gold", c2, 118, 990, 1.2]]]
-  ];
+function drawRow(c, row, values, yc, alpha, t) {
+  if (row.type === "divider") return divider(c, yc, alpha);
+  if (row.type === "date") return dateBlock(c, values, yc, alpha, t, THEMES[theme].ink);
+  const text = formatText(row.text, values), opt = row.options || {};
+  if (row.color === "gold") goldText(c, text, row.font, row.size, alpha, yc, t + (row.delay || 0), opt);
+  else inkText(c, text, row.font, row.size, THEMES[theme].ink, alpha, yc, opt);
 }
 function overlay(c, t) {
   const v = V(); const th = THEMES[theme]; const ink = th.ink;
@@ -303,29 +242,26 @@ function overlay(c, t) {
     c.fillStyle = rgb(lo); c.fillText(v.mono, W / 2 + 0.7 * k, cy + 1); c.fillStyle = rgb(hi); c.fillText(v.mono, W / 2, cy); c.restore();
   }
   if (t < 6.0) return;
-  for (const [a, b, items] of scenes(v)) {
+  for (const scene of P.scenes) {
+    const a = scene.start, b = scene.end;
     if (t < a - 0.1 || t > b + 0.1) continue;
     const out = b < DUR ? 1 - ease(seg(t, b - 0.45, b)) : 1;
-    for (const [type, text, size, yc0, d, kind2] of items) {
+    for (const row of scene.rows) {
+      const d = row.delay || 0;
       const e = easeOut(seg(t, a + d, a + d + 1.0)); const k = e * out; if (k <= 0.01) continue;
-      const yc = CY0 + yc0 + 70 + (1 - e) * 30;
-      if (type === "cap") inkText(c, text, "serif", size, ink, k, yc, { caps: true, maxw: 780 });
-      else if (type === "ital") inkText(c, text, "ital", size, ink, k, yc, { maxw: 780 });
-      else if (type === "serifb") inkText(c, text, "serif", size, ink, k, yc, { weight: 600, maxw: 780 });
-      else if (type === "ink") inkText(c, text, kind2 || "serif", size, ink, k, yc, {});
-      else if (type === "gold") goldText(c, text, "script", size, k, yc, t + d, {});
-      else if (type === "div") divider(c, yc, k);
-      else if (type === "date") dateBlock(c, v, yc, k, t, ink);
+      const yc = CY0 + row.y + 70 + (1 - e) * 30;
+      drawRow(c, row, v, yc, k, t);
     }
   }
 }
 
 /* ---------------- video playback ---------------- */
-const vid = document.getElementById("bgv"); let curT = 7.5, playing = false, recording = false, rafId = 0;
+const vid = document.getElementById("bgv"); let curT = 7.5, playing = false, recording = false, exportingCard = false, rafId = 0;
 function draw(t) { if (vid.readyState >= 2) ctx.drawImage(vid, 0, 0, W, H); else { ctx.fillStyle = "#efe6da"; ctx.fillRect(0, 0, W, H); } overlay(ctx, t); }
 function loadTheme() {
-  status(""); vid.src = `assets/bg_${theme}.mp4`; vid.load();
-  vid.onloadeddata = () => { vid.currentTime = playing ? 0 : 8.8; };
+  setExportReady(false); status("Loading your invitation...");
+  vid.onerror = () => { setExportReady(false); status("The background video could not be loaded. Please reload this page.", true); }; vid.src = THEMES[theme].video; vid.load();
+  vid.onloadeddata = () => { vid.currentTime = playing ? 0 : 8.8; status(""); setExportReady(true); };
   vid.onseeked = () => { if (!playing) draw(vid.currentTime); };
 }
 function loop() {
@@ -335,7 +271,7 @@ function loop() {
 }
 function startPlay() { playing = true; vid.currentTime = 0; const pr = vid.play(); if (pr) pr.catch(() => {}); rafId = requestAnimationFrame(loop); }
 function stopPlay() { playing = false; cancelAnimationFrame(rafId); vid.pause(); if (!recording) { document.getElementById("playBtn").innerHTML = "&#9654; Play preview"; } }
-document.getElementById("playBtn").onclick = () => { if (recording) return; if (playing) { stopPlay(); } else { document.getElementById("playBtn").textContent = "Stop"; startPlay(); } };
+document.getElementById("playBtn").onclick = () => { if (recording || exportingCard) return; if (playing) { stopPlay(); } else { document.getElementById("playBtn").textContent = "Stop"; startPlay(); } };
 
 /* ---------------- export video ---------------- */
 function status(s, err) { const el = document.getElementById("status"); el.textContent = s; el.className = "status" + (err ? " err" : ""); }
@@ -344,7 +280,18 @@ function pickType() {
   for (const t of types) { try { if (window.MediaRecorder && MediaRecorder.isTypeSupported(t)) return t; } catch (e) {} }
   return "";
 }
-function fileName(ext) { const v = V(); const n = (KIND === "wedding" ? v.name1 + "_" + v.name2 : v.honoree).replace(/[^\w]+/g, "_").replace(/^_|_$/g, ""); return `Invitation_${n || "video"}.${ext}`; }
+function fileName(ext) { const n = formatText(P.fileName, V()).replace(/[^\w]+/g, "_").replace(/^_|_$/g, ""); return `Invitation_${n || "video"}.${ext}`; }
+function setExportReady(ready) { for (const id of ["videoBtn", "cardBtn", "playBtn"]) document.getElementById(id).disabled = !ready; }
+function lockForm(locked) { document.querySelectorAll("#form input, #form select, #formMore input, #formMore select, .sw").forEach(el => { el.disabled = locked; }); }
+async function seekVideo(time) {
+  if (Math.abs(vid.currentTime - time) < .001 && !vid.seeking && vid.readyState >= 2) return;
+  await new Promise((resolve, reject) => {
+    const timer = setTimeout(() => finish(new Error("The video could not start. Please try again.")), 15000);
+    const finish = error => { clearTimeout(timer); vid.removeEventListener("seeked", done); vid.removeEventListener("error", failed); error ? reject(error) : resolve(); };
+    const done = () => finish(), failed = () => finish(new Error("The background video could not be loaded."));
+    vid.addEventListener("seeked", done, { once: true }); vid.addEventListener("error", failed, { once: true }); vid.currentTime = time;
+  });
+}
 async function deliver(blob, name) {
   const file = new File([blob], name, { type: blob.type });
   if (navigator.canShare && navigator.canShare({ files: [file] }) && /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)) {
@@ -354,60 +301,74 @@ async function deliver(blob, name) {
   setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 4000);
 }
 document.getElementById("videoBtn").onclick = async () => {
-  if (recording) return; const type = pickType();
+  if (recording || exportingCard) return; const type = pickType();
   if (!type || !cv.captureStream) { status("Sorry, this browser cannot make videos. Please open this page in Chrome or Safari.", true); return; }
-  stopPlay(); recording = true; const btn = document.getElementById("videoBtn"); btn.disabled = true; document.getElementById("playBtn").disabled = true;
-  const prog = document.getElementById("prog"), bar = prog.firstElementChild; prog.style.display = "block"; document.getElementById("done").style.display = "none";
+  stopPlay(); recording = true; setExportReady(false); lockForm(true);
+  const prog = document.getElementById("prog"), bar = prog.firstElementChild; prog.style.display = "block"; bar.style.width = "0%"; document.getElementById("done").style.display = "none";
   status("Making your video. Keep this page open (about 25 seconds).");
-  const stream = cv.captureStream(30); const chunks = [];
-  const rec = new MediaRecorder(stream, { mimeType: type, videoBitsPerSecond: 9000000 });
-  rec.ondataavailable = e => { if (e.data && e.data.size) chunks.push(e.data); };
-  const finished = new Promise(r => rec.onstop = r);
-  vid.currentTime = 0; await new Promise(r => { vid.onseeked = r; }); vid.onseeked = null;
-  draw(0); rec.start(250); playing = true; await vid.play().catch(() => {});
-  await new Promise(resolve => {
-    const step = () => {
-      curT = vid.currentTime; draw(curT); bar.style.width = Math.min(100, curT / DUR * 100) + "%";
-      if (vid.ended || curT >= DUR - 0.03) { resolve(); return; }
-      requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  });
-  draw(DUR - 0.01); await new Promise(r => setTimeout(r, 300)); rec.stop(); await finished; playing = false;
-  const blob = new Blob(chunks, { type: type.split(";")[0] }); const ext = type.includes("mp4") ? "mp4" : "webm";
-  bar.style.width = "100%"; status(""); recording = false; btn.disabled = false; document.getElementById("playBtn").disabled = false;
-  document.getElementById("playBtn").innerHTML = "&#9654; Play preview";
-  vid.onseeked = () => { if (!playing) draw(vid.currentTime); };
-  document.getElementById("done").style.display = "block";
-  await deliver(blob, fileName(ext));
+  let stream, rec, frame = 0, timeout;
+  try {
+    stream = cv.captureStream(30); const chunks = [];
+    // About 6.6 MB before encoder overhead; Chrome's variable bitrate can exceed the target.
+    // Keep the full 1080x1920 / 30 fps canvas for legible text and artwork.
+    rec = new MediaRecorder(stream, { mimeType: type, videoBitsPerSecond: 2400000 });
+    rec.ondataavailable = e => { if (e.data && e.data.size) chunks.push(e.data); };
+    let failRecorder;
+    const failed = new Promise((_, reject) => { failRecorder = reject; });
+    rec.onerror = () => failRecorder(new Error("Video recording failed. Please try again."));
+    // Keep this handled even if the recorder fails between awaited steps.
+    failed.catch(() => {});
+    const finished = new Promise(r => rec.onstop = r);
+    await seekVideo(0); draw(0); rec.start(250); playing = true; await Promise.race([vid.play(), failed]);
+    await Promise.race([new Promise((resolve, reject) => {
+      timeout = setTimeout(() => reject(new Error("The video stopped playing. Please try again.")), 60000);
+      const step = () => {
+        curT = vid.currentTime; draw(curT); bar.style.width = Math.min(100, curT / DUR * 100) + "%";
+        if (vid.ended || curT >= DUR - 0.03) { clearTimeout(timeout); resolve(); return; }
+        frame = requestAnimationFrame(step);
+      };
+      frame = requestAnimationFrame(step);
+    }), failed]);
+    draw(DUR - 0.01); await new Promise(r => setTimeout(r, 300)); rec.stop(); await finished;
+    const blob = new Blob(chunks, { type: type.split(";")[0] }); const ext = type.includes("mp4") ? "mp4" : "webm";
+    if (!blob.size) throw new Error("The video was empty. Please try again.");
+    bar.style.width = "100%"; status(""); document.getElementById("done").style.display = "block";
+    await deliver(blob, fileName(ext));
+  } catch (e) { status(e.message || "The video could not be made. Please try again.", true); }
+  finally {
+    clearTimeout(timeout); cancelAnimationFrame(frame); if (rec && rec.state !== "inactive") rec.stop();
+    if (stream) stream.getTracks().forEach(track => track.stop());
+    playing = false; recording = false; vid.pause(); lockForm(false); setExportReady(vid.readyState >= 2 && !vid.error);
+    document.getElementById("playBtn").innerHTML = "&#9654; Play preview";
+  }
 };
 
 /* ---------------- printable 5x7 card ---------------- */
 document.getElementById("cardBtn").onclick = async () => {
-  const img = new Image(); img.src = `assets/card_${theme}.jpg`; await img.decode();
-  const c2 = document.createElement("canvas"); c2.width = 1500; c2.height = 2100; const c = c2.getContext("2d"); c.drawImage(img, 0, 0);
-  const v = V(); const ink = THEMES[theme].ink; const S = 1500 / W; c.save(); c.translate((1500 - W * 1) / 2, 0);
-  // reuse the drawing helpers on a 1080-wide coordinate system centered in the 1500 card
-  const rows = KIND === "wedding"
-    ? [["cap", v.intro, 40, 620], ["gold", v.name1, 200, 765], ["ink", "&", 110, 905, "script"], ["gold", v.name2, 200, 1040]]
-    : [["cap", v.intro, 40, 640], ["gold", v.title, 210, 790], ["cap", v.honor, 38, 920], ["gold", v.honoree, 160, 1040]];
-  const sh = KIND === "baby" ? 40 : 0;
-  const rest = [["ital", v.invite, 56, 1180], ["serifb", `${v.wd}, ${v.month} ${v.day}, ${v.year}`, 64, 1280], ["ital", v.time, 52, 1360],
-    ["serifb", v.venue, 66, 1450], ["ital", v.address, 48, 1520], ["serif", `${v.rsvpLine}  |  ${v.rsvp}`, 36, 1610]];
-  rows.map(r => [r[0], r[1], r[2], r[3] + sh, r[4]]).concat(rest.map(r => [r[0], r[1], r[2], r[3] + sh])).forEach(([type, text, size, yc, kind2]) => {
-    if (type === "cap") inkText(c, text, "serif", size, ink, 1, yc, { caps: true, maxw: 1000 });
-    else if (type === "ital") inkText(c, text, "ital", size, ink, 1, yc, { maxw: 1100 });
-    else if (type === "serifb") inkText(c, text, "serif", size, ink, 1, yc, { weight: 600, maxw: 1100 });
-    else if (type === "serif") inkText(c, text, "serif", size, ink, 1, yc, { weight: 500, maxw: 1100 });
-    else if (type === "ink") inkText(c, text, kind2, size, ink, 1, yc, {});
-    else if (type === "gold") goldText(c, text, "script", size, 1, yc, 0, { shimmer: false, maxw: 1100 });
-  });
-  c.restore();
-  c2.toBlob(b => deliver(b, fileName("jpg").replace("Invitation_", "Printable_Card_")), "image/jpeg", 0.95);
+  if (recording || exportingCard) return;
+  stopPlay(); exportingCard = true; setExportReady(false); lockForm(true); status("");
+  try {
+    const img = new Image(); img.src = THEMES[theme].card; await img.decode();
+    const c2 = document.createElement("canvas"); c2.width = 1500; c2.height = 2100; const c = c2.getContext("2d"); c.drawImage(img, 0, 0);
+    const v = V(); c.save(); c.translate((1500 - W * 1) / 2, 0);
+    for (const row of P.card.rows) drawRow(c, row, v, row.y + P.card.offsetY, 1, 0);
+    c.restore();
+    const blob = await new Promise(resolve => c2.toBlob(resolve, "image/jpeg", 0.95));
+    if (!blob) throw new Error("The printable card could not be made. Please try again.");
+    await deliver(blob, fileName("jpg").replace("Invitation_", "Printable_Card_"));
+  } catch (e) { status("The printable card could not be made. Please reload this page and try again.", true); }
+  finally { exportingCard = false; lockForm(false); setExportReady(vid.readyState >= 2 && !vid.error); }
 };
 
 /* ---------------- start ---------------- */
-document.fonts.load('40px "GV"').then(() => document.fonts.load('500 40px "CG"')).then(() => document.fonts.load('italic 40px "CGI"')).finally(() => { loadTheme(); });
+await Promise.all([document.fonts.load('40px "GV"'), document.fonts.load('500 40px "CG"'), document.fonts.load('italic 40px "CGI"')]);
+loadTheme();
+})().catch(error => {
+  console.error(error);
+  const status = document.getElementById("status"); status.className = "status err"; status.setAttribute("role", "alert");
+  status.textContent = "This invitation could not be opened. Please check your link and reload the page.";
+  for (const id of ["playBtn", "videoBtn", "cardBtn"]) document.getElementById(id).disabled = true;
+});
 </script>
 </body>
 </html>

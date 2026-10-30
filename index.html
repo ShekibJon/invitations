@@ -302,7 +302,7 @@ async function deliver(blob, name) {
 }
 document.getElementById("videoBtn").onclick = async () => {
   if (recording || exportingCard) return; const type = pickType();
-  if (!type || !cv.captureStream) { status("Sorry, this browser cannot make videos. Please open this page in Chrome or Safari.", true); return; }
+  if (!type || !cv.captureStream) { status("This browser cannot make videos. For video export, open this page in Chrome or Edge on Android or a computer. You can still download the printable card here.", true); return; }
   stopPlay(); recording = true; setExportReady(false); lockForm(true);
   const prog = document.getElementById("prog"), bar = prog.firstElementChild; prog.style.display = "block"; bar.style.width = "0%"; document.getElementById("done").style.display = "none";
   status("Making your video. Keep this page open (about 25 seconds).");

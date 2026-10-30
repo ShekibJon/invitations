@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "lang": "sv",
+  "title": "Din 50-årsfestinbjudan",
+  "themes": ["bdaygold"],
+  "fields": [
+    ["name", "Namn", "Anna Lindgren", 40],
+    ["age", "Ålder", "50", 3],
+    ["date", "Datum", "2027-08-14", 0, "date"],
+    ["time", "Tid", "kl. 18.00", 24],
+    ["venue", "Plats", "Grand Hotel", 40],
+    ["address", "Adress", "Storgatan 5", 48],
+    ["rsvp", "OSA: e-post eller telefon", "anna@mail.se", 40]
+  ],
+  "more": [
+    ["rsvpDate", "OSA senast", "2027-08-01", 0, "date"],
+    ["closing", "Avslutning", "Vi ses på festen!", 54],
+    ["monogram", "Text på sigillet", "", 5]
+  ],
+  "themeStyles": {
+    "bdaygold": {
+      "name": "Blush och guld",
+      "ink": [91, 67, 54],
+      "seal": [181, 133, 70],
+      "sw": "linear-gradient(135deg,#f6ded9,#c99c63)",
+      "video": "assets/bg_bdaygold.mp4",
+      "card": "assets/card_bdaygold.jpg"
+    }
+  },
+  "monogram": {
+    "fields": ["name"],
+    "separator": "",
+    "fallback": "F",
+    "hint": "Lämna tomt för första bokstaven i namnet."
+  },
+  "reply": {
+    "withDate": "OSA senast {day} {month} till",
+    "withoutDate": "OSA till"
+  },
+  "dateLine": "{wd} {day} {month} {year}",
+  "fileName": "Fodelsedagsfest_{name}",
+  "artworkNote": "Återanvänder den godkända, vitjusterade bdaygold-konsten och befintliga födelsedags- och svenska inbjudningslayouter.",
+  "scenes": [
+    {
+      "start": 6.6,
+      "end": 10.8,
+      "rows": [
+        {"type": "text", "text": "Jag fyller {age}, kom och fira!", "size": 44, "y": 450, "delay": 0, "font": "serif", "color": "ink", "options": {"caps": true, "maxw": 780}},
+        {"type": "text", "text": "{name}", "size": 170, "y": 650, "delay": 0.35, "font": "script", "color": "gold", "options": {"maxw": 800}},
+        {"type": "text", "text": "{age}-ÅRSFEST", "size": 38, "y": 800, "delay": 0.7, "font": "serif", "color": "ink", "options": {"caps": true, "maxw": 700}},
+        {"type": "text", "text": "{age}", "size": 260, "y": 1020, "delay": 1.0, "font": "script", "color": "gold", "options": {"maxw": 500}}
+      ]
+    },
+    {
+      "start": 10.8,
+      "end": 14.8,
+      "rows": [
+        {"type": "text", "text": "Välkomna till en fest med stil och skratt", "size": 58, "y": 470, "delay": 0, "font": "ital", "color": "ink", "options": {"maxw": 780}},
+        {"type": "date", "y": 760, "delay": 0.4},
+        {"type": "text", "text": "{time}", "size": 58, "y": 1060, "delay": 1.0, "font": "ital", "color": "ink", "options": {"maxw": 780}}
+      ]
+    },
+    {
+      "start": 14.8,
+      "end": 18.6,
+      "rows": [
+        {"type": "text", "text": "Plats", "size": 40, "y": 470, "delay": 0, "font": "serif", "color": "ink", "options": {"caps": true, "maxw": 780}},
+        {"type": "text", "text": "{venue}", "size": 86, "y": 600, "delay": 0.3, "font": "serif", "color": "ink", "options": {"weight": 600, "maxw": 780}},
+        {"type": "text", "text": "{address}", "size": 52, "y": 720, "delay": 0.6, "font": "ital", "color": "ink", "options": {"maxw": 780}},
+        {"type": "divider", "y": 830, "delay": 0.8}
+      ]
+    },
+    {
+      "start": 18.6,
+      "end": 23,
+      "rows": [
+        {"type": "text", "text": "{rsvpLine}", "size": 38, "y": 470, "delay": 0, "font": "serif", "color": "ink", "options": {"caps": true, "maxw": 780}},
+        {"type": "text", "text": "{rsvp}", "size": 70, "y": 590, "delay": 0.3, "font": "serif", "color": "ink", "options": {"weight": 600, "maxw": 780}},
+        {"type": "divider", "y": 710, "delay": 0.6},
+        {"type": "text", "text": "{closing}", "size": 104, "y": 900, "delay": 0.9, "font": "script", "color": "gold", "options": {"maxw": 800}}
+      ]
+    }
+  ],
+  "card": {
+    "offsetY": 0,
+    "rows": [
+      {"type": "text", "text": "Jag fyller {age}, kom och fira!", "size": 42, "y": 560, "delay": 0, "font": "ital", "color": "ink", "options": {"maxw": 1100}},
+      {"type": "text", "text": "{age}-årsfest", "size": 165, "y": 720, "delay": 0, "font": "script", "color": "gold", "options": {"shimmer": false, "maxw": 1100}},
+      {"type": "text", "text": "{name}", "size": 130, "y": 880, "delay": 0, "font": "script", "color": "gold", "options": {"shimmer": false, "maxw": 1100}},
+      {"type": "text", "text": "Välkomna till en fest med stil och skratt", "size": 44, "y": 1000, "delay": 0, "font": "ital", "color": "ink", "options": {"maxw": 1100}},
+      {"type": "text", "text": "{dateLine}", "size": 64, "y": 1080, "delay": 0, "font": "serif", "color": "ink", "options": {"weight": 600, "maxw": 1100}},
+      {"type": "text", "text": "{time}", "size": 52, "y": 1150, "delay": 0, "font": "ital", "color": "ink", "options": {"maxw": 1100}},
+      {"type": "text", "text": "{venue}, {address}", "size": 52, "y": 1230, "delay": 0, "font": "serif", "color": "ink", "options": {"weight": 600, "maxw": 1100}},
+      {"type": "text", "text": "{rsvpLine} {rsvp}", "size": 36, "y": 1330, "delay": 0, "font": "serif", "color": "ink", "options": {"weight": 500, "maxw": 1100}},
+      {"type": "text", "text": "{closing}", "size": 78, "y": 1435, "delay": 0, "font": "script", "color": "gold", "options": {"shimmer": false, "maxw": 1100}}
+    ]
+  }
+}
